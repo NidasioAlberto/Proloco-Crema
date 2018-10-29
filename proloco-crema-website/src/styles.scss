@@ -1,1 +1,15 @@
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$proloco-crema-primary: mat-palette($mat-blue);
+$proloco-crema-accent:  mat-palette($mat-green, A700);
+
+$proloco-crema-warn:    mat-palette($mat-red);
+
+$proloco-crema-theme: mat-light-theme($proloco-crema-primary, $proloco-crema-accent, $proloco-crema-warn);
+
+@include angular-material-theme($proloco-crema-theme);

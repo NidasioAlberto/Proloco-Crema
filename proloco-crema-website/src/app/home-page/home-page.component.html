@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+    <span>Proloco Crema</span>
+
+    <!-- taps buttons -->
+    <div fxFlex fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px" fxHide.sx>
+        <button mat-button *ngFor="let link of links" [routerLink]="link.route">{{link.lable}}</button>
+    </div>
+
+    <!-- login icon button -->
+    <button mat-icon-button>
+        <mat-icon aria-label="Login into your account">account_circle</mat-icon>
+    </button>
+</mat-toolbar>
+
+<!-- child component will be shown here -->
+<router-outlet></router-outlet>
