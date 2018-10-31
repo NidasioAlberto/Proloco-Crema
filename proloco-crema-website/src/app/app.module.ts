@@ -12,15 +12,18 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
+import { MatListModule } from '@angular/material/list'
 
 //app components
 import { MainContentComponent } from './home-page/main-content/main-content.component'
 import { HowToContentComponent } from './home-page/how-to-content/how-to-content.component'
 import { AboutContentComponent } from './home-page/about-content/about-content.component'
+import { LoginComponent } from './home-page/login/login.component'
 
 //firebase
 import { AngularFireModule } from '@angular/fire'
 
+//environment variable
 import { environment } from '../environments/environment'
 
 @NgModule({
@@ -29,7 +32,8 @@ import { environment } from '../environments/environment'
         HomePageComponent,
         MainContentComponent,
         HowToContentComponent,
-        AboutContentComponent
+        AboutContentComponent,
+        LoginComponent
     ],
     imports: [
         BrowserModule,
@@ -42,6 +46,7 @@ import { environment } from '../environments/environment'
         MatToolbarModule,
         MatButtonModule,
         MatIconModule,
+        MatListModule
     ],
     providers: [],
     bootstrap: [AppComponent]

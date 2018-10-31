@@ -5,6 +5,7 @@ import { HomePageComponent } from './home-page/home-page.component'
 import { MainContentComponent } from './home-page/main-content/main-content.component'
 import { HowToContentComponent } from './home-page/how-to-content/how-to-content.component'
 import { AboutContentComponent } from './home-page/about-content/about-content.component'
+import { LoginComponent } from  './home-page/login/login.component'
 
 import { AuthGuard } from './core/auth.guard'
 
@@ -31,6 +32,10 @@ const routes: Routes = [
                 path: 'about',
                 component: AboutContentComponent,
                 canActivate: [AuthGuard],
+            },
+            {
+                path: 'login',
+                component: LoginComponent
             },
         ],
     },
