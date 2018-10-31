@@ -6,6 +6,8 @@ import { MainContentComponent } from './home-page/main-content/main-content.comp
 import { HowToContentComponent } from './home-page/how-to-content/how-to-content.component'
 import { AboutContentComponent } from './home-page/about-content/about-content.component'
 
+import { AuthGuard } from './core/auth.guard'
+
 const routes: Routes = [
     { path: '', redirectTo: '/public/home', pathMatch: 'full' },
     {
@@ -27,7 +29,8 @@ const routes: Routes = [
             },
             {
                 path: 'about',
-                component: AboutContentComponent
+                component: AboutContentComponent,
+                canActivate: [AuthGuard],
             },
         ],
     },
