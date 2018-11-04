@@ -6,28 +6,30 @@ import { AngularFireAuth } from '@angular/fire/auth'
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  constructor(
-    private afAuth: AngularFireAuth,
-    private router: Router
-  ) { }
+    constructor(
+        private afAuth: AngularFireAuth,
+        private router: Router
+    ) { }
 
-  googleLogin() {
-    const provider = new auth.GoogleAuthProvider()
-    return this.oAuthLogin(provider)
-  }
+    googleLogin() {
+        const provider = new auth.GoogleAuthProvider()
+        return this.oAuthLogin(provider).then(userCredentials => {
+            return userCredentials.user
+        })
+    }
 
-  private oAuthLogin(provider) {
-    return this.afAuth.auth.signInWithPopup(provider)
-  }
+    private oAuthLogin(provider) {
+        return this.afAuth.auth.signInWithPopup(provider)
+    }
 
-  signOut() {
-    this.afAuth.auth.signOut().then(() => {
-        this.router.navigate(['/'])
-    })
-  }
+    signOut() {
+        this.afAuth.auth.signOut().then(() => {
+            this.router.navigate(['/'])
+        })
+    }
 
-  getUser() {
-    console.log(this.afAuth.auth.currentUser)
-    return(this.afAuth.auth.currentUser != null)
-  }
+    getUser() {
+        console.log(this.afAuth.auth.currentUser)
+        return(this.afAuth.auth.currentUser != null)
+    }
 }

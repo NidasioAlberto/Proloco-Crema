@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
 
 @Component({
     selector: 'app-home-page',
@@ -22,8 +23,12 @@ export class HomePageComponent implements OnInit {
     ]
     activeLink = this.links[0]
 
-    constructor() { }
+    constructor(private router: Router) { }
 
     ngOnInit() {
+    }
+
+    login() {
+        this.router.navigate(['/public/login'])
     }
 }

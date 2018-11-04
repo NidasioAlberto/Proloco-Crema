@@ -10,7 +10,6 @@ import { LoginComponent } from  './home-page/login/login.component'
 import { AuthGuard } from './core/auth.guard'
 
 const routes: Routes = [
-    { path: '', redirectTo: '/public/home', pathMatch: 'full' },
     {
         path: 'public',
         component: HomePageComponent,
@@ -31,7 +30,6 @@ const routes: Routes = [
             {
                 path: 'about',
                 component: AboutContentComponent,
-                canActivate: [AuthGuard],
             },
             {
                 path: 'login',
@@ -39,6 +37,7 @@ const routes: Routes = [
             },
         ],
     },
+    { path: '**', redirectTo: '/public/home' },
 ];
 
 @NgModule({
