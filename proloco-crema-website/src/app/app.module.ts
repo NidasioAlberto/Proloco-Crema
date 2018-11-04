@@ -23,6 +23,8 @@ import { LoginComponent } from './home-page/login/login.component'
 
 //firebase
 import { AngularFireModule } from '@angular/fire'
+import { AngularFireAuthModule } from '@angular/fire/auth'
+import { AngularFirestoreModule } from '@angular/fire/firestore'
 
 //environment variable
 import { environment } from '../environments/environment';
@@ -44,7 +46,10 @@ import { UserProfileComponent } from './home-page/user-profile/user-profile.comp
         BrowserAnimationsModule,
         FlexLayoutModule,
         CoreModule,
+        //firebase
         AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule,
+        AngularFirestoreModule,
         //material components
         MatToolbarModule,
         MatButtonModule,
