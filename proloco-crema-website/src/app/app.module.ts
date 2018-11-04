@@ -24,7 +24,8 @@ import { LoginComponent } from './home-page/login/login.component'
 import { AngularFireModule } from '@angular/fire'
 
 //environment variable
-import { environment } from '../environments/environment'
+import { environment } from '../environments/environment';
+import { UserProfileComponent } from './home-page/user-profile/user-profile.component'
 
 @NgModule({
     declarations: [
@@ -33,7 +34,8 @@ import { environment } from '../environments/environment'
         MainContentComponent,
         HowToContentComponent,
         AboutContentComponent,
-        LoginComponent
+        LoginComponent,
+        UserProfileComponent
     ],
     imports: [
         BrowserModule,
