@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
+import { AuthService } from '../core/auth.service'
 
 @Component({
     selector: 'app-home-page',
@@ -7,6 +8,8 @@ import { Router } from '@angular/router'
     styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
+
+    userPhotoUrl: String = null
     links = [
         {
             lable: 'Home',
@@ -23,12 +26,21 @@ export class HomePageComponent implements OnInit {
     ]
     activeLink = this.links[0]
 
-    constructor(private router: Router) { }
+    constructor(private router: Router, private auth: AuthService) {
+        this.auth.user.subscribe(user => {
+            console.log('user photo url: ', user.photoURL)
+            this.userPhotoUrl = user.photoURL
+        })
+    }
 
     ngOnInit() {
     }
 
     login() {
         this.router.navigate(['/public/login'])
+    }
+
+    showUserProfile() {
+        this.router.navigate(['/public/user-profile'])
     }
 }

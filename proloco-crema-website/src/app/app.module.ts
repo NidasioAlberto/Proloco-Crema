@@ -13,6 +13,7 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { MatListModule } from '@angular/material/list'
+import { MatCardModule } from '@angular/material/card'
 
 //app components
 import { MainContentComponent } from './home-page/main-content/main-content.component'
@@ -48,7 +49,8 @@ import { UserProfileComponent } from './home-page/user-profile/user-profile.comp
         MatToolbarModule,
         MatButtonModule,
         MatIconModule,
-        MatListModule
+        MatListModule,
+        MatCardModule
     ],
     providers: [],
     bootstrap: [AppComponent]

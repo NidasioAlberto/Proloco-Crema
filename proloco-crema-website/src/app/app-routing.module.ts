@@ -6,6 +6,7 @@ import { MainContentComponent } from './home-page/main-content/main-content.comp
 import { HowToContentComponent } from './home-page/how-to-content/how-to-content.component'
 import { AboutContentComponent } from './home-page/about-content/about-content.component'
 import { LoginComponent } from  './home-page/login/login.component'
+import { UserProfileComponent } from './home-page/user-profile/user-profile.component'
 
 import { AuthGuard } from './core/auth.guard'
 
@@ -34,6 +35,10 @@ const routes: Routes = [
             {
                 path: 'login',
                 component: LoginComponent
+            },
+            {
+                path: 'user-profile',
+                component: UserProfileComponent
             },
         ],
     },

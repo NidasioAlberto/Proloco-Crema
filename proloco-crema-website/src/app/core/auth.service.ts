@@ -3,13 +3,19 @@ import { Router } from '@angular/router'
 
 import { auth } from 'firebase/app'
 import { AngularFireAuth } from '@angular/fire/auth'
+import { Observable } from 'rxjs'
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+
+    user: Observable<firebase.User>
+
     constructor(
         private afAuth: AngularFireAuth,
         private router: Router
-    ) { }
+    ) {
+        this.user = this.afAuth.authState
+    }
 
     googleLogin() {
         const provider = new auth.GoogleAuthProvider()
@@ -29,7 +35,6 @@ export class AuthService {
     }
 
     getUser() {
-        console.log(this.afAuth.auth.currentUser)
-        return(this.afAuth.auth.currentUser != null)
+        return this.afAuth.auth.currentUser
     }
 }
