@@ -10,13 +10,11 @@ export class AuthService {
 
     user: Observable<firebase.User>
 
-    constructor(
-        private afAuth: AngularFireAuth,
-        private router: Router
-    ) {
+    constructor(private afAuth: AngularFireAuth, private router: Router) {
         this.user = this.afAuth.authState
     }
 
+    //opens a new popup page to login with google
     googleLogin() {
         const provider = new auth.GoogleAuthProvider()
         return this.oAuthLogin(provider).then(userCredentials => {
@@ -31,10 +29,17 @@ export class AuthService {
     signOut() {
         this.afAuth.auth.signOut().then(() => {
             this.router.navigate(['/'])
+        }).catch(err => {
+            console.log('error while logging out !')
         })
     }
 
+    //this function return the current user object
     getUser() {
         return this.afAuth.auth.currentUser
+    }
+
+    logout() {
+        this.afAuth.auth.signOut()
     }
 }

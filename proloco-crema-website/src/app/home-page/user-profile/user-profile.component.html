@@ -9,5 +9,9 @@
             <br>
             Your role is: {{userRole}}
         </mat-card-content>
+        <mat-card-actions>
+            <button mat-button *ngIf="userRole == 'admin'" (click)="goToConsole()">Go to console</button>
+            <button mat-button (click)="logout()">Logout</button>
+        </mat-card-actions>
     </mat-card>
 </div>

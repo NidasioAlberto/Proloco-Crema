@@ -7,6 +7,7 @@
     </div>
 
     <!-- login icon button -->
+    <button *ngIf="goToConsoleVisible" mat-button>Go to console</button>
     <button mat-icon-button>
         <mat-icon *ngIf="userPhotoUrl == null" aria-label="Login into your account" (click)="login()">account_circle</mat-icon>
         <img  *ngIf="userPhotoUrl != null" src="{{userPhotoUrl}}" style="height:75%; border-radius: 50%" (click)="showUserProfile()">

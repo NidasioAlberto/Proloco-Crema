@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist",
+    "public": "dist/proloco-crema-website",
     "ignore": [
       "firebase.json",
       "**/.*",

@@ -2,23 +2,32 @@ import { Injectable } from '@angular/core'
 import { AngularFirestore } from '@angular/fire/firestore'
 import { AuthService } from './auth.service'
 import { map } from 'rxjs/operators'
+import { Observable, Observer } from 'rxjs'
+import { UserData } from '../utils/user-data'
 
 @Injectable({
     providedIn: 'root'
 })
 export class FirestoreService {
-    constructor(private firestore: AngularFirestore, private auth: AuthService) { }
 
-    getUserData(uid?: string) {//}: Promise<any> {
-        if(!uid) {
-            uid = this.auth.getUser().uid
-        }
-        console.log('uid', uid)
-        console.log(this.auth.getUser())
-        return this.firestore.collection('Users').doc(uid).snapshotChanges().pipe(
-            map(data => {
-                return data.payload.data()
-            })
-        )
-    }
+    /**
+     * This observable contains the user data stored in the firestore
+     * if the user logs out an error occurs
+     */
+    user: Observable<UserData> = Observable.create((observer: Observer<UserData>) => {
+        //when the user changes the observable needs to change as well
+        this.auth.user.subscribe(user => {
+            if(user) {
+                //if the user is logged in we can retrieve it's data
+                this.firestore.collection('Users').doc(user.uid).valueChanges().subscribe(data => {
+                    observer.next(data)
+                })
+            } else {
+                //otherwise the user data will be null the we can throw an error
+                observer.error('the user is not logged')
+            }
+        })
+    })
+
+    constructor(private firestore: AngularFirestore, private auth: AuthService) { }
 }

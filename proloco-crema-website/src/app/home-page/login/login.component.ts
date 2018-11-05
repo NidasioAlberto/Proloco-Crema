@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { AuthService } from '../../core/auth.service'
+import { Router } from '@angular/router'
 
 @Component({
     selector: 'app-login',
@@ -8,7 +9,7 @@ import { AuthService } from '../../core/auth.service'
 })
 export class LoginComponent implements OnInit {
 
-    constructor(private auth: AuthService) { }
+    constructor(private auth: AuthService, private router: Router) { }
 
     ngOnInit() {
     }
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
     login() {
         this.auth.googleLogin().then(user => {
             //we have the user !
-            console.log(user)
+            if(user != undefined) this.router.navigate(['/public/user-profile'])
         })
     }
 }
