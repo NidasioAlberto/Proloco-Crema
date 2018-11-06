@@ -40,11 +40,8 @@ export class HomePageComponent {
 
         //subscribe to the user data to show or not the "go to console button"
         this.firestore.user.subscribe(user => {
-            console.log('new user data !', user)
-            this.goToConsoleVisible = user.role == 'admin'
-        }, err => {
-            //the user has logged out, the "go to console button" needs to be removed
-            this.goToConsoleVisible = false
+            if(user !== null) this.goToConsoleVisible = user.role == 'admin'
+            else this.goToConsoleVisible = null
         })
     }
 
@@ -60,5 +57,12 @@ export class HomePageComponent {
      */
     showUserProfile() {
         this.router.navigate(['/public/user-profile'])
+    }
+    
+    /**
+     * Redirect the user to the console section of the website
+     */
+    goToConsole() {
+        this.router.navigate(['/console'])
     }
 }

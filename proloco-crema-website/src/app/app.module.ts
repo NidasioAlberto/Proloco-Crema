@@ -28,7 +28,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore'
 
 //environment variable
 import { environment } from '../environments/environment';
-import { UserProfileComponent } from './home-page/user-profile/user-profile.component'
+import { UserProfileComponent } from './home-page/user-profile/user-profile.component';
+import { ConsoleComponent } from './console/console.component'
 
 @NgModule({
     declarations: [
@@ -38,7 +39,8 @@ import { UserProfileComponent } from './home-page/user-profile/user-profile.comp
         HowToContentComponent,
         AboutContentComponent,
         LoginComponent,
-        UserProfileComponent
+        UserProfileComponent,
+        ConsoleComponent
     ],
     imports: [
         BrowserModule,

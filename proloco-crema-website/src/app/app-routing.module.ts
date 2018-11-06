@@ -9,6 +9,7 @@ import { LoginComponent } from  './home-page/login/login.component'
 import { UserProfileComponent } from './home-page/user-profile/user-profile.component'
 
 import { AuthGuard } from './core/auth.guard'
+import { ConsoleComponent } from './console/console.component';
 
 const routes: Routes = [
     {
@@ -41,6 +42,10 @@ const routes: Routes = [
                 component: UserProfileComponent
             },
         ],
+    },
+    {
+        path: 'console',
+        component: ConsoleComponent
     },
     { path: '**', redirectTo: '/public/home' },
 ];

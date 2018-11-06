@@ -24,7 +24,7 @@ export class FirestoreService {
                 })
             } else {
                 //otherwise the user data will be null the we can throw an error
-                observer.error('the user is not logged')
+                observer.next(null)
             }
         })
     })

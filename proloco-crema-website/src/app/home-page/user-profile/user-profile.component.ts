@@ -23,7 +23,8 @@ export class UserProfileComponent implements OnInit {
 
         //subscribe to the user data
         this.firestore.user.subscribe(user => {
-            this.userRole = user.role
+            if(user != null) this.userRole = user.role
+            else this.userRole = null
         })
     }
 
@@ -35,6 +36,6 @@ export class UserProfileComponent implements OnInit {
     }
 
     goToConsole() {
-        console.log('go to console !')
+        this.router.navigate(['/console'])
     }
 }
