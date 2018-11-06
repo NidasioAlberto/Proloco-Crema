@@ -33,6 +33,7 @@ export class HomePageComponent {
         //subscribe to the user account to show the photo in the top right
         this.auth.user.subscribe(user => {
             if(user != undefined) this.userPhotoUrl = user.photoURL
+            else this.userPhotoUrl = null
         }, err => {
             console.log('error !', err)
         })
