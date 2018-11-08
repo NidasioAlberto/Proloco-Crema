@@ -34,11 +34,6 @@ export class AuthService {
         })
     }
 
-    //this function return the current user object
-    getUser() {
-        return this.afAuth.auth.currentUser
-    }
-
     logout() {
         this.afAuth.auth.signOut()
     }
