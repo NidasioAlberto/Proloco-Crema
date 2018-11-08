@@ -37,6 +37,6 @@ export class UserProfileComponent implements OnInit {
     }
 
     goToConsole(associationId: String) {
-        this.router.navigate(['/console/' + associationId])
+        this.router.navigate(['/console', associationId])
     }
 }

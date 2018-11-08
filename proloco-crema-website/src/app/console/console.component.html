@@ -1,3 +1,11 @@
-<p>
-  console works!
-</p>
+<mat-toolbar color="primary">
+    <span *ngIf="association != null">{{association.name}}</span>
+
+    <!-- taps buttons -->
+    <div fxFlex fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px" fxHide.sx>
+        <button mat-button *ngFor="let link of links" [routerLink]="link.route">{{link.lable}}</button>
+    </div>
+</mat-toolbar>
+
+<!-- child component will be shown here -->
+<router-outlet></router-outlet>

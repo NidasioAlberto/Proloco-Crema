@@ -1,15 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core'
+import { FirestoreService } from '../core/firestore.service'
+import { ActivatedRoute } from '@angular/router'
+import { Association } from '../utils/user-data';
 
 @Component({
-  selector: 'app-console',
-  templateUrl: './console.component.html',
-  styleUrls: ['./console.component.scss']
+    selector: 'app-console',
+    templateUrl: './console.component.html',
+    styleUrls: ['./console.component.scss']
 })
-export class ConsoleComponent implements OnInit {
+export class ConsoleComponent {
 
-  constructor() { }
+    association: Association = null
+    links = [
+        {
+            lable: 'Summary',
+            route: 'summary',
+        },
+        {
+            lable: 'Paths',
+            route: 'paths',
+        },
+        {
+            lable: 'Places',
+            route: 'places',
+        } 
+    ]
+    activeLink = this.links[0]
 
-  ngOnInit() {
-  }
-
+    constructor(private firestore: FirestoreService, private router: ActivatedRoute) {
+        this.router.params.subscribe(params => {
+            this.firestore.getAssociationData(params.associationId).subscribe((associationData: Association) => {
+                this.association = associationData
+            })
+        })
+    }
 }

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core'
 import { AngularFirestore } from '@angular/fire/firestore'
 import { AuthService } from './auth.service'
 import { map } from 'rxjs/operators'
-import { Observable, Observer } from 'rxjs'
-import { UserData } from '../utils/user-data'
+import { Observable, Observer, observable } from 'rxjs'
+import { UserData, Association } from '../utils/user-data'
 
 @Injectable({
     providedIn: 'root'
@@ -30,4 +30,8 @@ export class FirestoreService {
     })
 
     constructor(private firestore: AngularFirestore, private auth: AuthService) { }
+
+    getAssociationData(associationId: string) {
+        return this.firestore.collection('Associations').doc(associationId).valueChanges()
+    }
 }

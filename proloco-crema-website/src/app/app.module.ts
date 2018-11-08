@@ -30,7 +30,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore'
 //environment variable
 import { environment } from '../environments/environment'
 import { UserProfileComponent } from './home-page/user-profile/user-profile.component'
-import { ConsoleComponent } from './console/console.component'
+import { ConsoleComponent } from './console/console.component';
+import { SummaryComponent } from './console/summary/summary.component';
+import { PathsComponent } from './console/paths/paths.component';
+import { PlacesComponent } from './console/places/places.component'
 
 @NgModule({
     declarations: [
@@ -41,7 +44,10 @@ import { ConsoleComponent } from './console/console.component'
         AboutContentComponent,
         LoginComponent,
         UserProfileComponent,
-        ConsoleComponent
+        ConsoleComponent,
+        SummaryComponent,
+        PathsComponent,
+        PlacesComponent
     ],
     imports: [
         BrowserModule,

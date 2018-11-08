@@ -9,7 +9,10 @@ import { LoginComponent } from  './home-page/login/login.component'
 import { UserProfileComponent } from './home-page/user-profile/user-profile.component'
 
 import { AuthGuard } from './core/auth.guard'
-import { ConsoleComponent } from './console/console.component';
+import { ConsoleComponent } from './console/console.component'
+import { SummaryComponent } from './console/summary/summary.component';
+import { PathsComponent } from './console/paths/paths.component';
+import { PlacesComponent } from './console/places/places.component';
 
 const routes: Routes = [
     {
@@ -45,7 +48,28 @@ const routes: Routes = [
     },
     {
         path: 'console/:associationId',
-        component: ConsoleComponent
+        component: ConsoleComponent,
+        canActivate: [AuthGuard],
+        children: [
+            {
+                path: '',
+                redirectTo: 'summary',
+                pathMatch: 'full'
+            },
+            {
+                path: 'summary',
+                component: SummaryComponent
+            },
+            {
+                path: 'paths',
+                component: PathsComponent
+            },
+            {
+                path: 'places',
+                component: PlacesComponent
+            }
+        ]
+
     },
     { path: '**', redirectTo: '/public/home' },
 ];
