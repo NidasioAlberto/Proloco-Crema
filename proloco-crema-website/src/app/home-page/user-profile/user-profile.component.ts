@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 import { AuthService } from '../../core/auth.service'
 import { FirestoreService } from 'src/app/core/firestore.service'
-import { Router } from '@angular/router';
-import { Association } from 'src/app/utils/user-data';
+import { Router } from '@angular/router'
+import { Association } from 'src/app/utils/user-data'
+import { Observable, combineLatest } from 'rxjs'
 
 @Component({
     selector: 'app-user-profile',
@@ -24,8 +25,15 @@ export class UserProfileComponent implements OnInit {
 
         //subscribe to the user data
         this.firestore.user.subscribe(user => {
-            if(user != null) this.associations = user.associations
-            else this.associations = []
+            let observables: Observable<Association>[] = []
+            user.associations.forEach(associationId => {
+                observables.push(this.firestore.getAssociationData(associationId))
+            })
+
+            combineLatest(observables).subscribe(data => {
+                console.log(data)
+                this.associations = data
+            })
         })
     }
 
