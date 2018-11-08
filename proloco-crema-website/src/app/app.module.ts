@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { MatListModule } from '@angular/material/list'
 import { MatCardModule } from '@angular/material/card'
+import { MatDividerModule } from '@angular/material/divider'
 
 //app components
 import { MainContentComponent } from './home-page/main-content/main-content.component'
@@ -27,8 +28,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth'
 import { AngularFirestoreModule } from '@angular/fire/firestore'
 
 //environment variable
-import { environment } from '../environments/environment';
-import { UserProfileComponent } from './home-page/user-profile/user-profile.component';
+import { environment } from '../environments/environment'
+import { UserProfileComponent } from './home-page/user-profile/user-profile.component'
 import { ConsoleComponent } from './console/console.component'
 
 @NgModule({
@@ -57,7 +58,8 @@ import { ConsoleComponent } from './console/console.component'
         MatButtonModule,
         MatIconModule,
         MatListModule,
-        MatCardModule
+        MatCardModule,
+        MatDividerModule
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -1,3 +1,11 @@
 export interface UserData {
-    role?: String
+    associations?: Association[]
+}
+
+/**
+ * This interface contains the data inside the associations attribute of the user data
+ */
+export interface Association {
+    id: String
+    role: 'admin'
 }

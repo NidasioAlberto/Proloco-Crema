@@ -44,7 +44,7 @@ const routes: Routes = [
         ],
     },
     {
-        path: 'console',
+        path: 'console/:associationId',
         component: ConsoleComponent
     },
     { path: '**', redirectTo: '/public/home' },

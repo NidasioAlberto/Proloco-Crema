@@ -1,7 +1,6 @@
 import { Component } from '@angular/core'
 import { Router } from '@angular/router'
 import { AuthService } from '../core/auth.service'
-import { FirestoreService } from '../core/firestore.service';
 
 @Component({
     selector: 'app-home-page',
@@ -27,21 +26,13 @@ export class HomePageComponent {
     ]
     activeLink = this.links[0]
 
-    goToConsoleVisible: boolean = false
-
-    constructor(private router: Router, private auth: AuthService, private firestore: FirestoreService) {
+    constructor(private router: Router, private auth: AuthService) {
         //subscribe to the user account to show the photo in the top right
         this.auth.user.subscribe(user => {
             if(user != undefined) this.userPhotoUrl = user.photoURL
             else this.userPhotoUrl = null
         }, err => {
             console.log('error !', err)
-        })
-
-        //subscribe to the user data to show or not the "go to console button"
-        this.firestore.user.subscribe(user => {
-            if(user !== null) this.goToConsoleVisible = user.role == 'admin'
-            else this.goToConsoleVisible = null
         })
     }
 
@@ -57,12 +48,5 @@ export class HomePageComponent {
      */
     showUserProfile() {
         this.router.navigate(['/public/user-profile'])
-    }
-    
-    /**
-     * Redirect the user to the console section of the website
-     */
-    goToConsole() {
-        this.router.navigate(['/console'])
     }
 }

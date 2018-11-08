@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { AuthService } from '../../core/auth.service'
 import { FirestoreService } from 'src/app/core/firestore.service'
 import { Router } from '@angular/router';
+import { Association } from 'src/app/utils/user-data';
 
 @Component({
     selector: 'app-user-profile',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class UserProfileComponent implements OnInit {
 
     user: firebase.User
-    userRole: String = null
+    associations: Association[] = []
 
     constructor(private auth: AuthService, private firestore: FirestoreService, private router: Router) {
         this.auth.user.subscribe(user => {
@@ -23,8 +24,8 @@ export class UserProfileComponent implements OnInit {
 
         //subscribe to the user data
         this.firestore.user.subscribe(user => {
-            if(user != null) this.userRole = user.role
-            else this.userRole = null
+            if(user != null) this.associations = user.associations
+            else this.associations = []
         })
     }
 
@@ -35,7 +36,7 @@ export class UserProfileComponent implements OnInit {
         this.auth.logout()
     }
 
-    goToConsole() {
-        this.router.navigate(['/console'])
+    goToConsole(associationId: String) {
+        this.router.navigate(['/console/' + associationId])
     }
 }
