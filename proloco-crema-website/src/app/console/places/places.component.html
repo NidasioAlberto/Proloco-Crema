@@ -1,5 +1,39 @@
 <div style="padding: 100px">
     <mat-card>
-        Here you will manage your places
+        <mat-card-header>
+            <mat-card-title>Places</mat-card-title>
+            <span style="flex: 1 1 auto;"></span>
+            <button mat-raised-button color="primary">Add place</button>
+        </mat-card-header>
+
+        <div style="height: 16px;"></div>
+
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let place of places">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>{{place.title}}</mat-panel-title>
+                    <mat-panel-description>{{place.address}}</mat-panel-description>
+                </mat-expansion-panel-header>
+                <mat-form-field>
+                    <mat-select placeholder="Default descriptions" [value]="place.descriptions.default">
+                        <mat-option *ngFor="let description of place.descriptions.texts" [value]="place.descriptions.texts.indexOf(description)">
+                            {{place.descriptions.texts.indexOf(description)}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <h3 class="mat-h3">Descriptions</h3>
+                <mat-list>
+                    <mat-list-item class="list-item" *ngFor="let description of place.descriptions.texts">
+                        <h2 style="margin: 8px;">{{place.descriptions.texts.indexOf(description)}}</h2>
+                        <h4 mat-line>{{description[description.languages[0]]}}</h4>
+                        <p mat-line>{{description.languages.length}} available language{{description.languages.length < 2 ? '' : 's'}}: {{description.languages.join(', ')}}</p>
+                    </mat-list-item>
+                    <div style="width: 100%; padding-top: 16px;" fxLayoutAlign="end end">
+                        <button mat-raised-button color="primary" style="margin: 0 8px;">Edit place</button>
+                        <button mat-raised-button color="primary" style="margin-left: 8px;">Add description</button>
+                    </div>
+                </mat-list>
+            </mat-expansion-panel>
+        </mat-accordion>
     </mat-card>
 </div>

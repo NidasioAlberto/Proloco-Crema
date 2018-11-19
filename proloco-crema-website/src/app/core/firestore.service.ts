@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core'
-import { AngularFirestore } from '@angular/fire/firestore'
+import { AngularFirestore, associateQuery } from '@angular/fire/firestore'
 import { AuthService } from './auth.service'
 import { Observable, Observer } from 'rxjs'
 import { UserData, Association } from '../utils/user-data'
 import { map } from 'rxjs/operators';
+import { Place } from '../utils/place';
 
 @Injectable({
     providedIn: 'root'
@@ -36,6 +37,19 @@ export class FirestoreService {
             map((associationData: Association) => {
                 associationData.id = associationId
                 return(associationData)
+            })
+        )
+    }
+
+    getPlaces(associationId: string) {
+        return this.firestore.collection('Places', ref => ref.where('association', '==', associationId)).valueChanges().pipe(
+            map((places: Place[]) => {
+                places.forEach(place => {
+                    place.descriptions.texts.forEach(description => {
+                        description.languages = Object.keys(description)
+                    })
+                })
+                return places
             })
         )
     }

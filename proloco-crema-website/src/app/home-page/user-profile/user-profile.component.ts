@@ -31,7 +31,6 @@ export class UserProfileComponent implements OnInit {
             })
 
             combineLatest(observables).subscribe(data => {
-                console.log(data)
                 this.associations = data
             })
         })

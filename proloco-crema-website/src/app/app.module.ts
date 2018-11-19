@@ -15,6 +15,8 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatListModule } from '@angular/material/list'
 import { MatCardModule } from '@angular/material/card'
 import { MatDividerModule } from '@angular/material/divider'
+import { MatExpansionModule } from '@angular/material/expansion'
+import { MatSelectModule } from '@angular/material/select'
 
 //app components
 import { MainContentComponent } from './home-page/main-content/main-content.component'
@@ -30,9 +32,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore'
 //environment variable
 import { environment } from '../environments/environment'
 import { UserProfileComponent } from './home-page/user-profile/user-profile.component'
-import { ConsoleComponent } from './console/console.component';
-import { SummaryComponent } from './console/summary/summary.component';
-import { PathsComponent } from './console/paths/paths.component';
+import { ConsoleComponent } from './console/console.component'
+import { SummaryComponent } from './console/summary/summary.component'
+import { PathsComponent } from './console/paths/paths.component'
 import { PlacesComponent } from './console/places/places.component'
 
 @NgModule({
@@ -65,7 +67,9 @@ import { PlacesComponent } from './console/places/places.component'
         MatIconModule,
         MatListModule,
         MatCardModule,
-        MatDividerModule
+        MatDividerModule,
+        MatExpansionModule,
+        MatSelectModule
     ],
     providers: [],
     bootstrap: [AppComponent]
