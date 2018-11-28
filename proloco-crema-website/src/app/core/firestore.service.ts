@@ -53,4 +53,8 @@ export class FirestoreService {
             })
         )
     }
+
+    setDefaultDescription(associationId, placeIndex, defaultDescription) {
+        //...
+    }
 }

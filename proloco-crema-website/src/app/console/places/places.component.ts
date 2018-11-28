@@ -11,6 +11,7 @@ import { FirestoreService } from 'src/app/core/firestore.service'
 export class PlacesComponent {
 
     places: Place[]
+    associationId: string
 
     constructor(private router: ActivatedRoute, private firestore: FirestoreService) {
         this.router.parent.params.subscribe(params => {
@@ -18,6 +19,13 @@ export class PlacesComponent {
                 this.places = places
                 console.log(this.places)
             })
+
+            this.associationId = params.associationId
         })
+    }
+
+    changeDefaultDescription(placeIndex, defaultDescription) {
+        //set the default description of the selected place
+
     }
 }
