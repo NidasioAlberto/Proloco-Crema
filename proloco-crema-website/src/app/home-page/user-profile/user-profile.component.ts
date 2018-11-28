@@ -25,14 +25,17 @@ export class UserProfileComponent implements OnInit {
 
         //subscribe to the user data
         this.firestore.user.subscribe(user => {
-            let observables: Observable<Association>[] = []
-            user.associations.forEach(associationId => {
-                observables.push(this.firestore.getAssociationData(associationId))
-            })
-
-            combineLatest(observables).subscribe(data => {
-                this.associations = data
-            })
+            //check if the user data are not null
+            if(user != undefined) {
+                let observables: Observable<Association>[] = []
+                user.associations.forEach(associationId => {
+                    observables.push(this.firestore.getAssociationData(associationId))
+                })
+    
+                combineLatest(observables).subscribe(data => {
+                    this.associations = data
+                })
+            }
         })
     }
 
