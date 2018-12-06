@@ -26,6 +26,6 @@ export class PlacesComponent {
 
     changeDefaultDescription(placeIndex, defaultDescription) {
         //set the default description of the selected place
-
+        this.firestore.setDefaultDescription(this.places[placeIndex].placeId, defaultDescription)
     }
 }

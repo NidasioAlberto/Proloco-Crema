@@ -42,19 +42,47 @@ export class FirestoreService {
     }
 
     getPlaces(associationId: string) {
+        return this.firestore.collection('Places', ref => ref.where('association', '==', associationId)).snapshotChanges().pipe(
+            map(places => {
+                return places.map(place => {
+                    var data = place.payload.doc.data() as Place
+
+                    //add the document id to the data
+                    data.placeId = place.payload.doc.id
+
+                    //add the languages qty to each description
+                    console.log('robe', data)
+                    data.descriptions.texts.forEach(description => {
+                        description.languages = Object.keys(description)
+                    })
+                    return data
+                })
+            })
+        )
+
+/*
         return this.firestore.collection('Places', ref => ref.where('association', '==', associationId)).valueChanges().pipe(
             map((places: Place[]) => {
                 places.forEach(place => {
                     place.descriptions.texts.forEach(description => {
                         description.languages = Object.keys(description)
                     })
+                    place.placeId = place['payload.descriptions.id']
                 })
                 return places
             })
-        )
+        )*/
     }
 
-    setDefaultDescription(associationId, placeIndex, defaultDescription) {
-        //...
+    setDefaultDescription(placeId, defaultDescription) {
+        console.log(placeId, defaultDescription)
+
+        this.firestore.collection('Places').doc(placeId).update({
+            defaultDescriptions: defaultDescription
+        }).then(() => {
+            console.log('data updated')
+        }).catch((e) => {
+            console.log(e)
+        })
     }
 }

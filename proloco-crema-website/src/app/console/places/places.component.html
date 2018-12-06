@@ -19,7 +19,7 @@
                 </mat-expansion-panel-header>
                 <mat-form-field>
                     <!-- This select sets the default description -->
-                    <mat-select placeholder="Default descriptions" [(value)]="place.descriptions.default" (selectionChange)="changeDefaultDescription(places.indexOf(place), place.descriptions.default)">
+                    <mat-select placeholder="Default descriptions" [(value)]="place.defaultDescription" (selectionChange)="changeDefaultDescription(places.indexOf(place), place.defaultDescriptions)">
                         <mat-option *ngFor="let description of place.descriptions.texts" [value]="place.descriptions.texts.indexOf(description)">
                             {{place.descriptions.texts.indexOf(description)}}
                         </mat-option>
