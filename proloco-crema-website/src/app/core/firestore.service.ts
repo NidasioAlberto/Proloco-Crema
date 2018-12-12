@@ -32,6 +32,11 @@ export class FirestoreService {
 
     constructor(private firestore: AngularFirestore, private auth: AuthService) { }
 
+    /**
+     * It retrieves all the data saved in the selected association document
+     * @param associationId id of the association
+     * @returns an observable of the association data
+     */
     getAssociationData(associationId: string) {
         return this.firestore.collection('Associations').doc(associationId).valueChanges().pipe(
             map((associationData: Association) => {
@@ -41,6 +46,11 @@ export class FirestoreService {
         )
     }
 
+    /**
+     * It retrieves all the places associated with the given association
+     * @param associationId id of the association
+     * @returns an observable of places
+     */
     getPlaces(associationId: string) {
         return this.firestore.collection('Places', ref => ref.where('association', '==', associationId)).snapshotChanges().pipe(
             map(places => {
@@ -60,15 +70,18 @@ export class FirestoreService {
         )
     }
 
-    setDefaultDescription(placeId, defaultDescription) {
+    /**
+     * Change the default description of a given place
+     * @param placeId the place id of which the default description will changed
+     * @param defaultDescription the value to set
+     */
+    setDefaultDescription(placeId: string, defaultDescription: number) {
         console.log(placeId, defaultDescription)
 
-        this.firestore.collection('Places').doc(placeId).update({
+        return this.firestore.collection('Places').doc(placeId).update({
             defaultDescription: defaultDescription
-        }).then(() => {
-            console.log('data updated')
-        }).catch((e) => {
-            console.log(e)
         })
     }
+
+    //createNewPlace(associationId)
 }

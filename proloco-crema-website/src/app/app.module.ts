@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
-
+import { FormsModule} from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -17,6 +17,8 @@ import { MatCardModule } from '@angular/material/card'
 import { MatDividerModule } from '@angular/material/divider'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatSelectModule } from '@angular/material/select'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatInputModule } from '@angular/material/input'
 
 //app components
 import { MainContentComponent } from './home-page/main-content/main-content.component'
@@ -35,7 +37,8 @@ import { UserProfileComponent } from './home-page/user-profile/user-profile.comp
 import { ConsoleComponent } from './console/console.component'
 import { SummaryComponent } from './console/summary/summary.component'
 import { PathsComponent } from './console/paths/paths.component'
-import { PlacesComponent } from './console/places/places.component'
+import { PlacesComponent } from './console/places/places.component';
+import { NewPlaceDialogComponent } from './console/places/new-place-dialog/new-place-dialog.component'
 
 @NgModule({
     declarations: [
@@ -49,7 +52,8 @@ import { PlacesComponent } from './console/places/places.component'
         ConsoleComponent,
         SummaryComponent,
         PathsComponent,
-        PlacesComponent
+        PlacesComponent,
+        NewPlaceDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -57,6 +61,7 @@ import { PlacesComponent } from './console/places/places.component'
         BrowserAnimationsModule,
         FlexLayoutModule,
         CoreModule,
+        FormsModule,
         //firebase
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireAuthModule,
@@ -69,7 +74,12 @@ import { PlacesComponent } from './console/places/places.component'
         MatCardModule,
         MatDividerModule,
         MatExpansionModule,
-        MatSelectModule
+        MatSelectModule,
+        MatDialogModule,
+        MatInputModule
+    ],
+    entryComponents: [
+        NewPlaceDialogComponent,
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Add a new place</h1>
+<div mat-dialog-content>
+    <mat-form-field class="title">
+        <input matInput placeholder="Title" [(ngModel)]="outData.title">
+    </mat-form-field>
+    
+    <mat-form-field class="address">
+        <input matInput placeholder="Address" [(ngModel)]="outData.address">
+    </mat-form-field>
+</div>
+    <div mat-dialog-actions>
+    <button mat-button (click)="saveNewPlace()">Save</button>
+    <button mat-button mat-dialog-close>Cancel</button>
+</div>
