@@ -51,7 +51,6 @@ export class FirestoreService {
                     data.placeId = place.payload.doc.id
 
                     //add the languages qty to each description
-                    console.log('robe', data)
                     data.descriptions.texts.forEach(description => {
                         description.languages = Object.keys(description)
                     })
@@ -59,26 +58,13 @@ export class FirestoreService {
                 })
             })
         )
-
-/*
-        return this.firestore.collection('Places', ref => ref.where('association', '==', associationId)).valueChanges().pipe(
-            map((places: Place[]) => {
-                places.forEach(place => {
-                    place.descriptions.texts.forEach(description => {
-                        description.languages = Object.keys(description)
-                    })
-                    place.placeId = place['payload.descriptions.id']
-                })
-                return places
-            })
-        )*/
     }
 
     setDefaultDescription(placeId, defaultDescription) {
         console.log(placeId, defaultDescription)
 
         this.firestore.collection('Places').doc(placeId).update({
-            defaultDescriptions: defaultDescription
+            defaultDescription: defaultDescription
         }).then(() => {
             console.log('data updated')
         }).catch((e) => {

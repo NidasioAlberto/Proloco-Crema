@@ -13,3 +13,5 @@ $proloco-crema-warn:    mat-palette($mat-red);
 $proloco-crema-theme: mat-light-theme($proloco-crema-primary, $proloco-crema-accent, $proloco-crema-warn);
 
 @include angular-material-theme($proloco-crema-theme);
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
