@@ -3,8 +3,10 @@ import { AngularFirestore, associateQuery } from '@angular/fire/firestore'
 import { AuthService } from './auth.service'
 import { Observable, Observer } from 'rxjs'
 import { UserData, Association } from '../utils/user-data'
-import { map } from 'rxjs/operators';
-import { Place } from '../utils/place';
+import { map } from 'rxjs/operators'
+import { Place } from '../utils/place'
+import { Description } from '../utils/description'
+import { firestore } from 'firebase'
 
 @Injectable({
     providedIn: 'root'
@@ -62,7 +64,7 @@ export class FirestoreService {
 
                     if(data.descriptions != undefined) {
                         //add the languages qty to each description
-                        data.descriptions.texts.forEach(description => {
+                        data.descriptions.forEach(description => {
                             description.languages = Object.keys(description)
                         })
                     }
@@ -92,5 +94,13 @@ export class FirestoreService {
      */
     createNewPlace(place: Place) {
         return this.firestore.collection('Places').add(place)
+    }
+
+    addDescription(placeId: string, description: Description) {
+        delete description.languages
+
+        return this.firestore.collection('Places').doc(placeId).update({
+            descriptions: firestore.FieldValue.arrayUnion(description)
+        })
     }
 }

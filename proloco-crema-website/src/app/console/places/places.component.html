@@ -21,22 +21,22 @@
                     <!-- This select sets the default description -->
                     <mat-form-field>
                         <mat-select placeholder="Default descriptions" [(value)]="place.defaultDescription" (selectionChange)="changeDefaultDescription(places.indexOf(place), place.defaultDescription)">
-                            <mat-option *ngFor="let description of place.descriptions.texts" [value]="place.descriptions.texts.indexOf(description)">
-                                {{place.descriptions.texts.indexOf(description)}}
+                            <mat-option *ngFor="let description of place.descriptions" [value]="place.descriptions.indexOf(description)">
+                                {{place.descriptions.indexOf(description)}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
                     <!-- List of descriptions -->
                     <h3 class="mat-h3">Descriptions</h3>
-                    <app-descriptions-list [descriptions]="place.descriptions.texts"></app-descriptions-list>
-                    <!-- place options -->
-                    <div style="width: 100%; padding-top: 16px;" fxLayoutAlign="end end">
-                        <!-- Allows the user edit the place, should shows a dialog -->
-                        <button mat-raised-button color="primary" style="margin: 0 8px;">Edit place</button>
-                
-                        <!-- Enable the user to add a description through a dialog -->
-                        <button mat-raised-button color="primary" style="margin-left: 8px;" (click)="addDescription()">Add description</button>
-                    </div>
+                    <app-descriptions-list [descriptions]="place.descriptions"></app-descriptions-list>
+                </div>
+                <!-- place options -->
+                <div style="width: 100%; padding-top: 16px;" fxLayoutAlign="end end">
+                    <!-- Allows the user edit the place, should shows a dialog -->
+                    <button mat-raised-button color="primary" style="margin: 0 8px;">Edit place</button>
+            
+                    <!-- Enable the user to add a description through a dialog -->
+                    <button mat-raised-button color="primary" style="margin-left: 8px;" (click)="addDescription(place.placeId)">Add description</button>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

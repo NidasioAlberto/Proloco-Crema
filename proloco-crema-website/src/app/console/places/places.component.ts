@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material'
 import { NewPlaceDialogComponent } from './new-place-dialog/new-place-dialog.component'
 import { firestore } from 'firebase';
 import { NewDescriptionDialogComponent } from './new-description-dialog/new-description-dialog.component';
+import { Description } from 'src/app/utils/description';
 
 @Component({
     selector: 'app-places',
@@ -52,12 +53,13 @@ export class PlacesComponent {
         });
     }
 
-    addDescription() {
+    addDescription(placeId: string) {
         this.dialog.open(NewDescriptionDialogComponent).afterClosed().subscribe(result => {
             if(result != undefined) {
-                console.log(result)
+                console.log(result, placeId)
 
                 //we can save the new description
+                this.firestore.addDescription(placeId, result as Description)
             }
         })
     }

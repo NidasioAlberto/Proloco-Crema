@@ -5,9 +5,6 @@ export interface Place {
     address: string
     association: string
     title: string
-    descriptions: {
-        default: number
-        texts: Description[]
-    }
+    descriptions: Description[]
     defaultDescription: number
 }
