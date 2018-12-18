@@ -17,37 +17,27 @@
                     <mat-panel-title>{{place.title}}</mat-panel-title>
                     <mat-panel-description>{{place.address}}</mat-panel-description>
                 </mat-expansion-panel-header>
-                <!-- This select sets the default description -->
-                <mat-form-field>
-                    <mat-select placeholder="Default descriptions" [(value)]="place.defaultDescription" (selectionChange)="changeDefaultDescription(places.indexOf(place), place.defaultDescription)">
-                        <mat-option *ngFor="let description of place.descriptions.texts" [value]="place.descriptions.texts.indexOf(description)">
-                            {{place.descriptions.texts.indexOf(description)}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <!-- List of descriptions -->
-                <h3 class="mat-h3">Descriptions</h3>
-                <mat-list>
-                    <!-- List elements -->
-                    <mat-list-item class="list-item" *ngFor="let description of place.descriptions.texts">
-                        <!-- Description number on the left -->
-                        <h2 style="margin: 8px;">{{place.descriptions.texts.indexOf(description)}}</h2>
-
-                        <!-- Description contente in the first available language -->
-                        <h4 mat-line>{{description[description.languages[0]]}}</h4>
-
-                        <!-- This line shows the available languages -->
-                        <p mat-line>{{description.languages.length}} available language{{description.languages.length < 2 ? '' : 's'}}: {{description.languages.join(', ')}}</p>
-                    </mat-list-item>
+                <div *ngIf="place.descriptions != null">
+                    <!-- This select sets the default description -->
+                    <mat-form-field>
+                        <mat-select placeholder="Default descriptions" [(value)]="place.defaultDescription" (selectionChange)="changeDefaultDescription(places.indexOf(place), place.defaultDescription)">
+                            <mat-option *ngFor="let description of place.descriptions.texts" [value]="place.descriptions.texts.indexOf(description)">
+                                {{place.descriptions.texts.indexOf(description)}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <!-- List of descriptions -->
+                    <h3 class="mat-h3">Descriptions</h3>
+                    <app-descriptions-list [descriptions]="place.descriptions.texts"></app-descriptions-list>
                     <!-- place options -->
                     <div style="width: 100%; padding-top: 16px;" fxLayoutAlign="end end">
                         <!-- Allows the user edit the place, should shows a dialog -->
                         <button mat-raised-button color="primary" style="margin: 0 8px;">Edit place</button>
-
+                
                         <!-- Enable the user to add a description through a dialog -->
-                        <button mat-raised-button color="primary" style="margin-left: 8px;">Add description</button>
+                        <button mat-raised-button color="primary" style="margin-left: 8px;" (click)="addDescription()">Add description</button>
                     </div>
-                </mat-list>
+                </div>
             </mat-expansion-panel>
         </mat-accordion>
     </mat-card>

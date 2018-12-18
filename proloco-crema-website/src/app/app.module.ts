@@ -19,6 +19,7 @@ import { MatExpansionModule } from '@angular/material/expansion'
 import { MatSelectModule } from '@angular/material/select'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatInputModule } from '@angular/material/input'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 
 //app components
 import { MainContentComponent } from './home-page/main-content/main-content.component'
@@ -38,7 +39,9 @@ import { ConsoleComponent } from './console/console.component'
 import { SummaryComponent } from './console/summary/summary.component'
 import { PathsComponent } from './console/paths/paths.component'
 import { PlacesComponent } from './console/places/places.component';
-import { NewPlaceDialogComponent } from './console/places/new-place-dialog/new-place-dialog.component'
+import { NewPlaceDialogComponent } from './console/places/new-place-dialog/new-place-dialog.component';
+import { NewDescriptionDialogComponent } from './console/places/new-description-dialog/new-description-dialog.component';
+import { DescriptionsListComponent } from './console/places/descriptions-list/descriptions-list.component'
 
 @NgModule({
     declarations: [
@@ -53,7 +56,9 @@ import { NewPlaceDialogComponent } from './console/places/new-place-dialog/new-p
         SummaryComponent,
         PathsComponent,
         PlacesComponent,
-        NewPlaceDialogComponent
+        NewPlaceDialogComponent,
+        NewDescriptionDialogComponent,
+        DescriptionsListComponent
     ],
     imports: [
         BrowserModule,
@@ -76,10 +81,11 @@ import { NewPlaceDialogComponent } from './console/places/new-place-dialog/new-p
         MatExpansionModule,
         MatSelectModule,
         MatDialogModule,
-        MatInputModule
+        MatInputModule,
+        MatSnackBarModule
     ],
     entryComponents: [
-        NewPlaceDialogComponent,
+        NewPlaceDialogComponent, NewDescriptionDialogComponent
     ],
     providers: [],
     bootstrap: [AppComponent]

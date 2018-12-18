@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router'
 import { FirestoreService } from 'src/app/core/firestore.service'
 import { MatDialog } from '@angular/material'
 import { NewPlaceDialogComponent } from './new-place-dialog/new-place-dialog.component'
+import { firestore } from 'firebase';
+import { NewDescriptionDialogComponent } from './new-description-dialog/new-description-dialog.component';
 
 @Component({
     selector: 'app-places',
@@ -38,10 +40,25 @@ export class PlacesComponent {
             console.log('The dialog was closed', result);
 
             //check if the result is valid
-            if(result != undefined) {
+            if(result != undefined) if(result.title != undefined && result.address != undefined) {
                 //create the new place
-                //TODO
+
+                this.firestore.createNewPlace({
+                    association: this.associationId,
+                    title: result.title,
+                    address: result.address
+                } as Place);
             }
         });
+    }
+
+    addDescription() {
+        this.dialog.open(NewDescriptionDialogComponent).afterClosed().subscribe(result => {
+            if(result != undefined) {
+                console.log(result)
+
+                //we can save the new description
+            }
+        })
     }
 }

@@ -60,10 +60,12 @@ export class FirestoreService {
                     //add the document id to the data
                     data.placeId = place.payload.doc.id
 
-                    //add the languages qty to each description
-                    data.descriptions.texts.forEach(description => {
-                        description.languages = Object.keys(description)
-                    })
+                    if(data.descriptions != undefined) {
+                        //add the languages qty to each description
+                        data.descriptions.texts.forEach(description => {
+                            description.languages = Object.keys(description)
+                        })
+                    }
                     return data
                 })
             })
@@ -83,5 +85,12 @@ export class FirestoreService {
         })
     }
 
-    //createNewPlace(associationId)
+    /**
+     * This function add in the firestore the place the user wants to create
+     * @param place the data we want to add
+     * @returns a promise of the document reference to the new place
+     */
+    createNewPlace(place: Place) {
+        return this.firestore.collection('Places').add(place)
+    }
 }

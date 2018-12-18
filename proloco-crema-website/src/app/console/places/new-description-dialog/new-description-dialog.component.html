@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Add a description</h1>
+<div mat-dialog-content>
+
+    <mat-list>
+        <mat-list-item *ngFor="let language of description.languages">
+            <h3 class="language-name">{{language}}</h3>
+            <mat-form-field>
+                <input matInput placeholder="Description" [(ngModel)]="description[language]">
+            </mat-form-field>
+        </mat-list-item>
+    </mat-list>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="saveNewDescription()">Save</button>
+    <button mat-button mat-dialog-close>Cancel</button>
+</div>

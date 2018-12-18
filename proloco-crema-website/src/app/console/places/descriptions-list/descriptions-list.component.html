@@ -1,0 +1,13 @@
+<mat-list>
+    <!-- List elements -->
+    <mat-list-item class="list-item" *ngFor="let description of descriptions">
+        <!-- Description number on the right -->
+        <h2 style="margin: 8px;">{{descriptions.indexOf(description)}}</h2>
+
+        <!-- Description contente in the first available language -->
+        <h4 mat-line>{{description[description.languages[0]]}}</h4>
+
+        <!-- This line shows the available languages -->
+        <p mat-line>{{description.languages.length}} available language{{description.languages.length < 2 ? '' : 's'}}: {{description.languages.join(', ')}}</p>
+    </mat-list-item>
+</mat-list>
