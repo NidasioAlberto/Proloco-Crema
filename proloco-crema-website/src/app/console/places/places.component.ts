@@ -35,7 +35,7 @@ export class PlacesComponent {
     }
 
     addPlace() {
-        const dialogRef = this.dialog.open(NewPlaceDialogComponent, null);
+        const dialogRef = this.dialog.open(NewPlaceDialogComponent, undefined);
       
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed', result);
@@ -62,5 +62,24 @@ export class PlacesComponent {
                 this.firestore.addDescription(placeId, result as Description)
             }
         })
+    }
+
+    editPlace(place: Place) {
+        //open the new place dialog in edit mode
+        const dialogRef = this.dialog.open(NewPlaceDialogComponent, { data: place });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The edit dialog was closed', result);
+
+            //check the data
+            if(result != undefined) {
+                //update the data in the firestore
+                this.firestore.updatePlace(place.placeId, result).then(() => {
+                    console.log('Place updated successfully')
+                }).catch((err) => {
+                    console.log(err)
+                })
+            }
+        });
     }
 }

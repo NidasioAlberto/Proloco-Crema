@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { Description } from 'src/app/utils/description';
 
 @Component({
@@ -6,9 +6,19 @@ import { Description } from 'src/app/utils/description';
     templateUrl: './descriptions-list.component.html',
     styleUrls: ['./descriptions-list.component.scss']
 })
-export class DescriptionsListComponent {
+export class DescriptionsListComponent implements OnInit {
 
     @Input() descriptions: Description[]
+    @Input() editable: any
 
-    constructor() { }
+    constructor() {}
+
+    ngOnInit() {
+        console.log('Is descriptions list editable? ', this.editable)
+    }
+
+
+    showDescription(description: Description) {
+        console.log('Show description', description)
+    }
 }

@@ -1,6 +1,6 @@
 <mat-list>
     <!-- List elements -->
-    <mat-list-item class="list-item" *ngFor="let description of descriptions">
+    <mat-list-item class="list-item" *ngFor="let description of descriptions" (click)="showDescription(description)">
         <!-- Description number on the right -->
         <h2 style="margin: 8px;">{{descriptions.indexOf(description)}}</h2>
 

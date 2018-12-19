@@ -28,12 +28,12 @@
                     </mat-form-field>
                     <!-- List of descriptions -->
                     <h3 class="mat-h3">Descriptions</h3>
-                    <app-descriptions-list [descriptions]="place.descriptions"></app-descriptions-list>
+                    <app-descriptions-list [descriptions]="place.descriptions" editable></app-descriptions-list>
                 </div>
                 <!-- place options -->
                 <div style="width: 100%; padding-top: 16px;" fxLayoutAlign="end end">
                     <!-- Allows the user edit the place, should shows a dialog -->
-                    <button mat-raised-button color="primary" style="margin: 0 8px;">Edit place</button>
+                    <button mat-raised-button color="primary" style="margin: 0 8px;" (click)="editPlace(place)">Edit place</button>
             
                     <!-- Enable the user to add a description through a dialog -->
                     <button mat-raised-button color="primary" style="margin-left: 8px;" (click)="addDescription(place.placeId)">Add description</button>

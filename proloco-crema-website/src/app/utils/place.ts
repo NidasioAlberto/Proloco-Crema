@@ -1,10 +1,10 @@
 import { Description } from './description'
 
 export interface Place {
-    placeId: string
+    placeId?: string
     address: string
-    association: string
+    association?: string
     title: string
-    descriptions: Description[]
-    defaultDescription: number
+    descriptions?: Description[]
+    defaultDescription?: number
 }

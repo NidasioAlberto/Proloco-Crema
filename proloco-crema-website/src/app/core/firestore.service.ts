@@ -96,6 +96,10 @@ export class FirestoreService {
         return this.firestore.collection('Places').add(place)
     }
 
+    updatePlace(placeId: string, toUpdate: Place) {
+        return this.firestore.collection('Places').doc(placeId).update(toUpdate)
+    }
+
     addDescription(placeId: string, description: Description) {
         delete description.languages
 
