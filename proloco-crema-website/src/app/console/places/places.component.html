@@ -1,11 +1,11 @@
 <div style="padding: 100px">
     <mat-card class="mat-elevation-z16">
         <mat-card-header>
-            <mat-card-title>Places</mat-card-title>
+            <mat-card-title>Monumenti</mat-card-title>
             <span style="flex: 1 1 auto;"></span>
 
             <!-- Opens a dialog to add a new place -->
-            <button mat-raised-button color="primary" (click)="addPlace()">Add place</button>
+            <button mat-raised-button color="primary" (click)="addPlace()">Aggiungi</button>
         </mat-card-header>
 
         <div style="height: 16px;"></div>
@@ -27,16 +27,16 @@
                         </mat-select>
                     </mat-form-field>
                     <!-- List of descriptions -->
-                    <h3 class="mat-h3">Descriptions</h3>
+                    <h3 class="mat-h3">Descrizioni</h3>
                     <app-descriptions-list [descriptions]="place.descriptions" editable></app-descriptions-list>
                 </div>
                 <!-- place options -->
                 <div style="width: 100%; padding-top: 16px;" fxLayoutAlign="end end">
                     <!-- Allows the user edit the place, should shows a dialog -->
-                    <button mat-raised-button color="primary" style="margin: 0 8px;" (click)="editPlace(place)">Edit place</button>
+                    <button mat-raised-button color="primary" style="margin: 0 8px;" (click)="editPlace(place)">Modifica</button>
             
                     <!-- Enable the user to add a description through a dialog -->
-                    <button mat-raised-button color="primary" style="margin-left: 8px;" (click)="addDescription(place.placeId)">Add description</button>
+                    <button mat-raised-button color="primary" style="margin-left: 8px;" (click)="addDescription(place.placeId)">Aggiungi</button>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
