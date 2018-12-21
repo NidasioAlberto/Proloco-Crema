@@ -47,6 +47,7 @@ import { NewPlaceDialogComponent } from './console/places/new-place-dialog/new-p
 import { NewDescriptionDialogComponent } from './console/places/new-description-dialog/new-description-dialog.component'
 import { DescriptionsListComponent } from './console/places/descriptions-list/descriptions-list.component'
 import { PathsListComponent } from './console/paths/paths-list/paths-list.component'
+import { GOOGLE_MAPS_API_KEY } from './api-keys';
 
 @NgModule({
     declarations: [
@@ -92,7 +93,7 @@ import { PathsListComponent } from './console/paths/paths-list/paths-list.compon
         MatTabsModule,
         //google maps
         AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyADPT3Ufwz4P25ad195w5pd1t5NT4FDbX0'
+            apiKey: GOOGLE_MAPS_API_KEY
         })
     ],
     entryComponents: [
