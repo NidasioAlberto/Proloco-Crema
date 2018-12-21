@@ -1,0 +1,40 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+    //all other documents can't be access nor modified (this is just in case we need to add data for testing)
+    match /{document=**} {
+      allow read, write: if false;
+    }
+    
+    //only the user can modify its data
+    match /Users/{userId} {
+    	allow read: if userId == request.auth.uid;
+    	allow read: if userId == request.auth.uid;
+    }
+    
+    //allow everyone to read places but only who is admin can modify it
+    match /Paths/{pathId} {
+    	allow read: if true;
+      allow write: if isAdmin(resource.data.association, request.auth.uid);
+    }
+    
+    //allow everyone to read places but only who is admin can modify it
+    match /Places/{placeId} {
+    	allow read: if true;
+      allow write: if isAdmin(resource.data.association, request.auth.uid);
+    }
+    
+    //Secure the association document by checking if the user is part of the association and allowing writing permission only if it is an admin
+    match /Associations/{associationId} {
+    	allow read: if exists(/databases/$(database)/documents/Associations/$(associationId)/Users/$(request.auth.uid));
+      allow write: if isAdmin(associationId, request.auth.uid);
+    }
+
+    function getRole(associationId, userId) {
+      return get(/databases/$(database)/documents/Associations/$(associationId)/Users/$(request.auth.uid)).data.role;
+    }
+
+    function isAdmin(associationId, userId) {
+      return getRole(associationId, userId) == "admin";
+    }
+  }
+}
