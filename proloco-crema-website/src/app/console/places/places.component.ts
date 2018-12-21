@@ -4,9 +4,8 @@ import { ActivatedRoute } from '@angular/router'
 import { FirestoreService } from 'src/app/core/firestore.service'
 import { MatDialog } from '@angular/material'
 import { NewPlaceDialogComponent } from './new-place-dialog/new-place-dialog.component'
-import { firestore } from 'firebase';
-import { NewDescriptionDialogComponent } from './new-description-dialog/new-description-dialog.component';
-import { Description } from 'src/app/utils/description';
+import { NewDescriptionDialogComponent } from './new-description-dialog/new-description-dialog.component'
+import { Description } from 'src/app/utils/description'
 
 @Component({
     selector: 'app-places',

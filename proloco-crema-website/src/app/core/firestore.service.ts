@@ -6,7 +6,8 @@ import { UserData, Association } from '../utils/user-data'
 import { map } from 'rxjs/operators'
 import { Place } from '../utils/place'
 import { Description } from '../utils/description'
-import { firestore } from 'firebase'
+import * as firebase from 'firebase/app'
+import { Path } from '../utils/path';
 
 @Injectable({
     providedIn: 'root'
@@ -104,7 +105,31 @@ export class FirestoreService {
         delete description.languages
 
         return this.firestore.collection('Places').doc(placeId).update({
-            descriptions: firestore.FieldValue.arrayUnion(description)
+            descriptions: firebase.firestore.FieldValue.arrayUnion(description)
         })
+    }
+    /**
+     * It retrieves all the paths associated with the given association
+     * @param associationId id of the association
+     * @returns an observable of paths
+     */
+    getPaths(associationId: string) {
+        return this.firestore.collection('Paths', ref => ref.where('association', '==', associationId)).snapshotChanges().pipe(
+            map(paths => {
+                return paths.map(path => {
+                    var data = path.payload.doc.data() as Path
+
+                    //add the document id to the data
+                    data.pathId = path.payload.doc.id
+
+                    //add the languages to each description
+                    data.description.languages = Object.keys(data.description)
+
+                    //add the languages also to the title
+                    data.title.languages = Object.keys(data.title)
+                    return data
+                })
+            })
+        )
     }
 }

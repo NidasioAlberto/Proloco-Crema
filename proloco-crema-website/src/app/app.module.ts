@@ -20,6 +20,7 @@ import { MatSelectModule } from '@angular/material/select'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatInputModule } from '@angular/material/input'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatTabsModule } from '@angular/material/tabs'
 
 //app components
 import { MainContentComponent } from './home-page/main-content/main-content.component'
@@ -32,16 +33,20 @@ import { AngularFireModule } from '@angular/fire'
 import { AngularFireAuthModule } from '@angular/fire/auth'
 import { AngularFirestoreModule } from '@angular/fire/firestore'
 
+//google maps
+import { AgmCoreModule } from '@agm/core'
+
 //environment variable
 import { environment } from '../environments/environment'
 import { UserProfileComponent } from './home-page/user-profile/user-profile.component'
 import { ConsoleComponent } from './console/console.component'
 import { SummaryComponent } from './console/summary/summary.component'
 import { PathsComponent } from './console/paths/paths.component'
-import { PlacesComponent } from './console/places/places.component';
-import { NewPlaceDialogComponent } from './console/places/new-place-dialog/new-place-dialog.component';
-import { NewDescriptionDialogComponent } from './console/places/new-description-dialog/new-description-dialog.component';
+import { PlacesComponent } from './console/places/places.component'
+import { NewPlaceDialogComponent } from './console/places/new-place-dialog/new-place-dialog.component'
+import { NewDescriptionDialogComponent } from './console/places/new-description-dialog/new-description-dialog.component'
 import { DescriptionsListComponent } from './console/places/descriptions-list/descriptions-list.component'
+import { PathsListComponent } from './console/paths/paths-list/paths-list.component'
 
 @NgModule({
     declarations: [
@@ -58,7 +63,8 @@ import { DescriptionsListComponent } from './console/places/descriptions-list/de
         PlacesComponent,
         NewPlaceDialogComponent,
         NewDescriptionDialogComponent,
-        DescriptionsListComponent
+        DescriptionsListComponent,
+        PathsListComponent
     ],
     imports: [
         BrowserModule,
@@ -82,12 +88,17 @@ import { DescriptionsListComponent } from './console/places/descriptions-list/de
         MatSelectModule,
         MatDialogModule,
         MatInputModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatTabsModule,
+        //google maps
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyADPT3Ufwz4P25ad195w5pd1t5NT4FDbX0'
+        })
     ],
     entryComponents: [
         NewPlaceDialogComponent, NewDescriptionDialogComponent
     ],
     providers: [],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -1,0 +1,24 @@
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let path of paths">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{path.title[path.title.languages[0]]}}
+            </mat-panel-title>
+            <mat-panel-description>
+                {{path.description[path.description.languages[0]]}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-tab-group mat-stretch-tabs>
+            <mat-tab label="Data">Here there will be the data</mat-tab>
+            <mat-tab label="Map">
+                <agm-map style="height: 300px;" [latitude]="51.678418" [longitude]="7.809007">
+                    <agm-polyline>
+                        <agm-polyline-point [latitude]="51.678418" [longitude]="7.809007"></agm-polyline-point>
+                        <agm-polyline-point [latitude]="51.668418" [longitude]="7.808007"></agm-polyline-point>
+                        <agm-polyline-point [latitude]="51.658418" [longitude]="7.809007"></agm-polyline-point>
+                    </agm-polyline>
+                </agm-map>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-expansion-panel>
+</mat-accordion>
