@@ -13,7 +13,9 @@ export class NewPlaceDialogComponent {
 
     outData: Place = {
         title: '',
-        address: '',
+        address: {
+            title: ''
+        },
     }
 
     constructor(public dialogRef: MatDialogRef<NewPlaceDialogComponent>, @Inject(MAT_DIALOG_DATA) public placeToEdit: Place) {
@@ -44,5 +46,9 @@ export class NewPlaceDialogComponent {
 
         //close the dialog with the given data
         this.dialogRef.close(this.outData)
+    }
+
+    close() {
+        this.dialogRef.close(undefined)
     }
 }

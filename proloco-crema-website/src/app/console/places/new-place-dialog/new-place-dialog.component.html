@@ -5,10 +5,10 @@
     </mat-form-field>
     
     <mat-form-field class="address">
-        <input matInput placeholder="Address" [(ngModel)]="outData.address">
+        <input matInput placeholder="Address" [(ngModel)]="outData.address.title">
     </mat-form-field>
 </div>
     <div mat-dialog-actions>
     <button mat-button (click)="saveNewPlace()">Salva</button>
-    <button mat-button mat-dialog-close>Cancella</button>
+    <button mat-button (click)="close()">Cancella</button>
 </div>

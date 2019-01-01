@@ -15,7 +15,7 @@
                 <!-- Expansion panel title and description -->
                 <mat-expansion-panel-header>
                     <mat-panel-title>{{place.title}}</mat-panel-title>
-                    <mat-panel-description>{{place.address}}</mat-panel-description>
+                    <mat-panel-description>{{place.address.title}}</mat-panel-description>
                 </mat-expansion-panel-header>
                 <div *ngIf="place.descriptions != null">
                     <!-- This select sets the default description -->

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core'
-import { AngularFirestore, associateQuery } from '@angular/fire/firestore'
+import { AngularFirestore, associateQuery, DocumentReference } from '@angular/fire/firestore'
 import { AuthService } from './auth.service'
 import { Observable, Observer } from 'rxjs'
 import { UserData, Association } from '../utils/user-data'
-import { map } from 'rxjs/operators'
+import { map, first, take } from 'rxjs/operators'
 import { Place } from '../utils/place'
 import { Description } from '../utils/description'
 import * as firebase from 'firebase/app'
@@ -63,16 +63,42 @@ export class FirestoreService {
                     //add the document id to the data
                     data.placeId = place.payload.doc.id
 
-                    if(data.descriptions != undefined) {
-                        //add the languages qty to each description
-                        data.descriptions.forEach(description => {
-                            description.languages = Object.keys(description)
-                        })
-                    }
+                    data.descriptions = this.addDescriptionLanaguagesToDescriptions(data.descriptions)
+
                     return data
                 })
             })
         )
+    }
+
+    /**
+     * It retrieve the place data from it's document reference
+     * @param placeRef The place's document reference
+     */
+    getPlace(placeRef: DocumentReference) {
+        if(placeRef != undefined) {
+            return this.firestore.doc<Place>(placeRef).valueChanges().pipe(
+                map(place => {
+                    place.descriptions = this.addDescriptionLanaguagesToDescriptions(place.descriptions)
+
+                    return place
+                })
+            )
+        } else {
+            return undefined
+        }
+    }
+
+    /**
+     * It adds a languages list to each description in the given array
+     * @param descriptions the array of descriptio to which add the languages list
+     */
+    addDescriptionLanaguagesToDescriptions(descriptions: Description[]) {
+        if(descriptions != undefined) descriptions.forEach(description => {
+            description.languages = Object.keys(description)
+        })
+
+        return descriptions
     }
 
     /**
@@ -97,6 +123,11 @@ export class FirestoreService {
         return this.firestore.collection('Places').add(place)
     }
 
+    /** 
+     * It updates the data of one place given the id
+     * @param placeId the place id to change
+     * @param toUpdate this is the data to set
+     */
     updatePlace(placeId: string, toUpdate: Place) {
         return this.firestore.collection('Places').doc(placeId).update(toUpdate)
     }
@@ -108,6 +139,7 @@ export class FirestoreService {
             descriptions: firebase.firestore.FieldValue.arrayUnion(description)
         })
     }
+
     /**
      * It retrieves all the paths associated with the given association
      * @param associationId id of the association
@@ -127,6 +159,17 @@ export class FirestoreService {
 
                     //add the languages also to the title
                     data.title.languages = Object.keys(data.title)
+
+                    //retrieve the places data
+                    data.places.forEach(place => {
+                        this.firestore.doc<Place>(place).valueChanges().pipe(
+                            take(1)
+                        ).subscribe(placeData => {
+                            if(data.placesData == undefined) data.placesData = []
+                            data.placesData.push(placeData)
+                        })
+                    })
+
                     return data
                 })
             })

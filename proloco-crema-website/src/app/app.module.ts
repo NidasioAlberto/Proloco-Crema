@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
-import { FormsModule} from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -21,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { MatInputModule } from '@angular/material/input'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatTabsModule } from '@angular/material/tabs'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 
 //app components
 import { MainContentComponent } from './home-page/main-content/main-content.component'
@@ -48,6 +49,9 @@ import { NewDescriptionDialogComponent } from './console/places/new-description-
 import { DescriptionsListComponent } from './console/places/descriptions-list/descriptions-list.component'
 import { PathsListComponent } from './console/paths/paths-list/paths-list.component'
 import { GOOGLE_MAPS_API_KEY } from './api-keys';
+import { PathDescriptionComponent } from './console/paths/paths-list/path-description/path-description.component';
+import { PathMapComponent } from './console/paths/paths-list/path-map/path-map.component';
+import { PathPlacesListComponent } from './console/paths/paths-list/path-description/path-places-list/path-places-list.component';
 
 @NgModule({
     declarations: [
@@ -65,7 +69,10 @@ import { GOOGLE_MAPS_API_KEY } from './api-keys';
         NewPlaceDialogComponent,
         NewDescriptionDialogComponent,
         DescriptionsListComponent,
-        PathsListComponent
+        PathsListComponent,
+        PathDescriptionComponent,
+        PathMapComponent,
+        PathPlacesListComponent
     ],
     imports: [
         BrowserModule,
@@ -74,6 +81,7 @@ import { GOOGLE_MAPS_API_KEY } from './api-keys';
         FlexLayoutModule,
         CoreModule,
         FormsModule,
+        ReactiveFormsModule,
         //firebase
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireAuthModule,
@@ -91,6 +99,7 @@ import { GOOGLE_MAPS_API_KEY } from './api-keys';
         MatInputModule,
         MatSnackBarModule,
         MatTabsModule,
+        MatAutocompleteModule,
         //google maps
         AgmCoreModule.forRoot({
             apiKey: GOOGLE_MAPS_API_KEY

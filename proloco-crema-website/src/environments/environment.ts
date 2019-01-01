@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyADPT3Ufwz4P25ad195w5pd1t5NT4FDbX0",
+    apiKey: "AIzaSyCvZbHqwohcCGjLj58dEV_BoZmFOdwlRGY",
     authDomain: "proloco-crema.firebaseapp.com",
     databaseURL: "https://proloco-crema.firebaseio.com",
     projectId: "proloco-crema",

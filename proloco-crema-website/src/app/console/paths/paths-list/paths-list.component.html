@@ -9,15 +9,11 @@
             </mat-panel-description>
         </mat-expansion-panel-header>
         <mat-tab-group mat-stretch-tabs>
-            <mat-tab label="Data">Here there will be the data</mat-tab>
+            <mat-tab label="Data">
+                <app-path-description [path]="path"></app-path-description>
+            </mat-tab>
             <mat-tab label="Map">
-                <agm-map style="height: 300px;" [latitude]="51.678418" [longitude]="7.809007">
-                    <agm-polyline>
-                        <agm-polyline-point [latitude]="51.678418" [longitude]="7.809007"></agm-polyline-point>
-                        <agm-polyline-point [latitude]="51.668418" [longitude]="7.808007"></agm-polyline-point>
-                        <agm-polyline-point [latitude]="51.658418" [longitude]="7.809007"></agm-polyline-point>
-                    </agm-polyline>
-                </agm-map>
+                <app-path-map [path]="path"></app-path-map>
             </mat-tab>
         </mat-tab-group>
     </mat-expansion-panel>
