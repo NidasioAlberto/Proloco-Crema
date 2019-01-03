@@ -102,7 +102,9 @@ import { PathPlacesListComponent } from './console/paths/paths-list/path-descrip
         MatAutocompleteModule,
         //google maps
         AgmCoreModule.forRoot({
-            apiKey: GOOGLE_MAPS_API_KEY
+            apiKey: GOOGLE_MAPS_API_KEY,
+            language: 'it',
+            libraries: ['places']
         })
     ],
     entryComponents: [

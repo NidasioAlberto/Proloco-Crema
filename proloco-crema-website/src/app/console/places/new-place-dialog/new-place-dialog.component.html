@@ -1,14 +1,20 @@
 <h1 mat-dialog-title>Aggiungi un nuovo monumento</h1>
 <div mat-dialog-content>
-    <mat-form-field class="title">
-        <input matInput placeholder="Title" [(ngModel)]="outData.title">
-    </mat-form-field>
-    
-    <mat-form-field class="address">
-        <input matInput placeholder="Address" [(ngModel)]="outData.address.title">
-    </mat-form-field>
+    <div>
+        <mat-form-field class="title">
+            <input matInput placeholder="Title" [(ngModel)]="outData.title">
+        </mat-form-field>
+        
+        <mat-form-field class="address">
+            <input #search matInput placeholder="Address" [(ngModel)]="outData.address.title">
+        </mat-form-field>
+    </div>
+
+    <agm-map style="width: 400px; height: 300px;" [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+        <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+    </agm-map>
 </div>
     <div mat-dialog-actions>
-    <button mat-button (click)="saveNewPlace()">Salva</button>
+    <button mat-button (click)="savePlace()">Salva</button>
     <button mat-button (click)="close()">Cancella</button>
 </div>
