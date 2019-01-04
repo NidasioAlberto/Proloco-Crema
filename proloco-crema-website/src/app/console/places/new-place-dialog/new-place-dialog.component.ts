@@ -2,8 +2,8 @@ import { Component, Inject, ElementRef, ViewChild, NgZone, OnInit } from '@angul
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 import { Place } from '../../../utils/place'
 import { MapsAPILoader } from '@agm/core'
-import { firestore } from 'firebase'
-import { Autocomplete, PlaceResult } from 'googlemaps'
+import * as firebase from 'firebase/app'
+declare var google: any
 
 @Component({
     selector: 'app-new-place-dialog',
@@ -40,7 +40,7 @@ export class NewPlaceDialogComponent implements OnInit {
             this.outData.title = placeToEdit.title
             this.outData.address.title = placeToEdit.address.title
             if(placeToEdit.address.geopoint != undefined) {
-                this.outData.address.geopoint = new firestore.GeoPoint(
+                this.outData.address.geopoint = new firebase.firestore.GeoPoint(
                     placeToEdit.address.geopoint.latitude,
                     placeToEdit.address.geopoint.longitude)
             }
@@ -87,7 +87,7 @@ export class NewPlaceDialogComponent implements OnInit {
                     this.zoom = 12;
 
                     //save the latitude and longiture also in outputdata
-                    this.outData.address.geopoint = new firestore.GeoPoint(this.latitude, this.longitude)
+                    this.outData.address.geopoint = new firebase.firestore.GeoPoint(this.latitude, this.longitude)
                     console.log('data changed', this.outData)
                 });
             });

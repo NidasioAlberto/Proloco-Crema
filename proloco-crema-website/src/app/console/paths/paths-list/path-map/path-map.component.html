@@ -1,3 +1,17 @@
-<p>
-  path-map works!
-</p>
+<agm-map style="width: 100%; height: 300px"
+    [latitude]="mapConfig.latitude"
+    [longitude]="mapConfig.longitude"
+    [zoom]="mapConfig.zoom">
+
+    <div *ngIf="places != undefined">
+        <agm-marker *ngFor="let place of places; let i = index"
+            [latitude]="place.address.geopoint.latitude"
+            [longitude]="place.address.geopoint.longitude"
+            [label]="i.toString()">
+
+            <agm-info-window>
+              <strong>{{place.descriptions[place.defaultDescription != undefined ? place.defaultDescription : 0].it}}</strong>
+            </agm-info-window>
+        </agm-marker>
+    </div>
+</agm-map>

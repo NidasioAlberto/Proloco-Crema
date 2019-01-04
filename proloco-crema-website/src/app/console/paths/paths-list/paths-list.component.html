@@ -13,7 +13,7 @@
                 <app-path-description [path]="path"></app-path-description>
             </mat-tab>
             <mat-tab label="Map">
-                <app-path-map [path]="path"></app-path-map>
+                <app-path-map [places]="path.placesData"></app-path-map>
             </mat-tab>
         </mat-tab-group>
     </mat-expansion-panel>

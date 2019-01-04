@@ -161,6 +161,7 @@ export class FirestoreService {
                     data.title.languages = Object.keys(data.title)
 
                     //retrieve the places data
+                    var promises = []
                     data.places.forEach(place => {
                         this.firestore.doc<Place>(place).valueChanges().pipe(
                             take(1)

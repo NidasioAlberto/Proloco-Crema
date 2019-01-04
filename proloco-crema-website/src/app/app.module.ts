@@ -36,6 +36,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore'
 
 //google maps
 import { AgmCoreModule } from '@agm/core'
+import { AgmDirectionModule } from 'agm-direction'
 
 //environment variable
 import { environment } from '../environments/environment'
@@ -105,7 +106,8 @@ import { PathPlacesListComponent } from './console/paths/paths-list/path-descrip
             apiKey: GOOGLE_MAPS_API_KEY,
             language: 'it',
             libraries: ['places']
-        })
+        }),
+        AgmDirectionModule
     ],
     entryComponents: [
         NewPlaceDialogComponent, NewDescriptionDialogComponent
