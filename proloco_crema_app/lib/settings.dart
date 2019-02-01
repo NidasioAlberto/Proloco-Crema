@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class Settings extends StatefulWidget {
   Function(bool) mapChange;
+  Function(bool) audioChange;
 
-  Settings({Key key, this.mapChange}) : super(key: key);
+  Settings({Key key, this.mapChange, this.audioChange}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => SettingsState();
@@ -18,6 +19,10 @@ class SettingsState extends State<Settings> with TickerProviderStateMixin {
   //impostazione mappa stellite / mappa normale
   bool mapSatellite = false;
   IconData mapIcon = Icons.layers_clear;
+
+  //impostazione audio off / audio on
+  bool audiooff= false;
+  IconData audioIcon = Icons.volume_off;
 
   Animation<RelativeRect> panelAnimation;
   
@@ -62,24 +67,39 @@ class SettingsState extends State<Settings> with TickerProviderStateMixin {
             ),
             child: Row(
               children: <Widget>[
-                IconButton(
-                  icon: Text(
-                    "IT",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0
-                    )
-                  ),
+                PopupMenuButton<String>(
+                  icon: Icon(Icons.language),
                   tooltip: "Lingua",
-                  onPressed: () {},
+                  onSelected: (result) => print(result),
+                  itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                    const PopupMenuItem(
+                      value: "en",
+                      child: Text('English'),
+                    ),
+                    const PopupMenuItem(
+                      value: "it",
+                      child: Text('Italiano'),
+                    ),
+                  ],
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4),
                 ),
                 IconButton(
-                  icon: Icon(Icons.volume_up),
+                  icon: Icon(audioIcon),
                   tooltip: "Audio",
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      if(audiooff) {
+                        audiooff = false;
+                        audioIcon = Icons.volume_off;
+                      } else {
+                        audiooff = true;
+                        audioIcon = Icons.volume_up;              
+                      }
+                      widget.audioChange(audiooff);
+                    });
+                  },
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4),

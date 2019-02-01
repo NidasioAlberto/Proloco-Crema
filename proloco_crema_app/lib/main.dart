@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'settings.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'translations.dart';
 
 void main() => runApp(new MyApp());
 
@@ -12,6 +14,15 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
+      localizationsDelegates: [
+        const TranslationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+          const Locale('en', ''),
+          const Locale('it', ''),
+      ],
       home: new MainPage(),
     );
   }
@@ -59,7 +70,9 @@ class MainPageState extends State<MainPage> {
             print("map changed to normal view");
           }
         });
-      },),
+      }, audioChange: (audiooff){
+
+      }),
     );
   }
 }
