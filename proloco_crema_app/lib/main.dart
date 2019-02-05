@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:proloco_crema_app/topbar.dart';
 import 'settings.dart';
+//import 'top_bar.dart';
+
+bool isFocused = false;
 
 void main() => runApp(new MyApp());
 
@@ -32,18 +36,26 @@ class MainPageState extends State<MainPage> {
     print('map created');
   }
 
-  void _onSettingsButtonPressed() {
-    print('settings button pressed');
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        onMapCreated: _onMapCreated,
-        options: GoogleMapOptions(
-          mapType: MapType.normal
-        ),
+      body: Stack(
+        children: <Widget>[
+          GoogleMap(
+            onMapCreated: _onMapCreated,
+            options: GoogleMapOptions(
+              mapType: MapType.normal
+            ),
+          ),
+          GestureDetector(
+            onTap: (){
+              FocusScope.of(context).requestFocus(new FocusNode());
+            },
+          ),
+          SafeArea(
+            child: TopBar(),
+          ),
+        ],
       ),
       floatingActionButton: Settings(mapChange: (mapSatellite) {
         setState(() {
