@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'allTranslations.dart';
 
 class Settings extends StatefulWidget {
   Function(bool) mapChange;
@@ -14,15 +15,17 @@ class SettingsState extends State<Settings> with TickerProviderStateMixin {
   AnimationController _controller;
   Animation _animation;
 
-  bool _areOpened = false;
+  bool _areOpened = true;
 
   //impostazione mappa stellite / mappa normale
-  bool mapSatellite = false;
-  IconData mapIcon = Icons.layers_clear;
+  bool mapSatellite = true;
+  IconData mapIcon = Icons.layers;
 
   //impostazione audio off / audio on
-  bool audiooff= false;
-  IconData audioIcon = Icons.volume_off;
+  bool audiooff= true;
+  IconData audioIcon = Icons.volume_up;
+
+  final String language = allTranslations.currentLanguage;
 
   Animation<RelativeRect> panelAnimation;
   
@@ -49,6 +52,15 @@ class SettingsState extends State<Settings> with TickerProviderStateMixin {
     _areOpened = !_areOpened;
   }
 
+  _changeLanguage(String lang) async {
+    if(lang != null){
+      await allTranslations.setNewLanguage(lang);
+      setState((){});
+      print("2");
+    }
+    print(lang +"1");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -57,7 +69,6 @@ class SettingsState extends State<Settings> with TickerProviderStateMixin {
         ScaleTransition(
           scale: _animation,
           alignment: FractionalOffset.center,
-          //rect: panelAnimation,
           child: Container(
             height: 50,
             margin: EdgeInsets.symmetric(horizontal: 16.0),
@@ -69,8 +80,11 @@ class SettingsState extends State<Settings> with TickerProviderStateMixin {
               children: <Widget>[
                 PopupMenuButton<String>(
                   icon: Icon(Icons.language),
-                  tooltip: "Lingua",
-                  onSelected: (result) => print(result),
+                  tooltip: allTranslations.text('language_tooltip'),
+                  onSelected: (result) { 
+                    print(result);
+                    _changeLanguage(result);
+                    },
                   itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
                     const PopupMenuItem(
                       value: "en",
@@ -91,11 +105,11 @@ class SettingsState extends State<Settings> with TickerProviderStateMixin {
                   onPressed: () {
                     setState(() {
                       if(audiooff) {
-                        audiooff = false;
-                        audioIcon = Icons.volume_off;
-                      } else {
                         audiooff = true;
-                        audioIcon = Icons.volume_up;              
+                        audioIcon = Icons.volume_up;
+                      } else {
+                        audiooff = false;
+                        audioIcon = Icons.volume_off;              
                       }
                       widget.audioChange(audiooff);
                     });
@@ -106,15 +120,15 @@ class SettingsState extends State<Settings> with TickerProviderStateMixin {
                 ),
                 IconButton(
                   icon: Icon(mapIcon),
-                  tooltip: "Tipo mappa",
+                  tooltip: allTranslations.text('map_tooltip'),
                   onPressed: () {
                     setState(() {
                       if(mapSatellite) {
-                        mapSatellite = false;
-                        mapIcon = Icons.layers_clear;
-                      } else {
                         mapSatellite = true;
-                        mapIcon = Icons.layers;              
+                        mapIcon = Icons.layers;
+                      } else {
+                        mapSatellite = false;
+                        mapIcon = Icons.layers_clear;              
                       }
                       widget.mapChange(mapSatellite);
                     });
@@ -127,7 +141,7 @@ class SettingsState extends State<Settings> with TickerProviderStateMixin {
         FloatingActionButton(
           child: Icon(Icons.settings),
           onPressed: _showSettings,
-          tooltip: "Impostazioni",
+          tooltip: allTranslations.text('setting_tooltip'),
         ),
       ],
     );

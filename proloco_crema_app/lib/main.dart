@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'settings.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'translations.dart';
+import 'allTranslations.dart';
 
-void main() => runApp(new MyApp());
+Future main() async {
+  await allTranslations.init();
+
+  runApp(new MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -15,14 +19,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       localizationsDelegates: [
-        const TranslationsDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      supportedLocales: [
-          const Locale('en', ''),
-          const Locale('it', ''),
-      ],
+      supportedLocales: allTranslations.supportedLocales(),
       home: new MainPage(),
     );
   }
@@ -46,6 +46,20 @@ class MainPageState extends State<MainPage> {
   void _onSettingsButtonPressed() {
     print('settings button pressed');
   }
+
+  @override
+    void initState(){
+        super.initState();
+
+        // Initializes a callback should something need 
+        // to be done when the language is changed
+        allTranslations.onLocaleChangedCallback = _onLocaleChanged;
+    }
+
+    _onLocaleChanged() async {
+        // do anything you need to do if the language changes
+        print('Language has been changed to: ${allTranslations.currentLanguage}');
+    }
 
   @override
   Widget build(BuildContext context) {
