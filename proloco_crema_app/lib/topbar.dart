@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class TopBar extends StatefulWidget {
+  Function onRoutesButtonClicked;
+
+  TopBar({Key key, this.onRoutesButtonClicked}) : super(key: key);
+
   @override
   _TopBarState createState() {
     return _TopBarState();
@@ -48,7 +52,7 @@ class _TopBarState extends State<TopBar> {
                 tooltip: "Percorsi",
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
-                onPressed: () => print('paths'),
+                onPressed: () => widget.onRoutesButtonClicked() ,
               ),
               IconButton(
                 icon: Icon(Icons.account_balance),

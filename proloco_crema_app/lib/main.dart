@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:proloco_crema_app/topbar.dart';
+import 'topbar.dart';
 import 'settings.dart';
-//import 'top_bar.dart';
-
-bool isFocused = false;
+import 'routescard.dart';
 
 void main() => runApp(new MyApp());
 
@@ -30,6 +28,7 @@ class MainPage extends StatefulWidget {
 
 class MainPageState extends State<MainPage> {
   GoogleMapController _controller;
+  bool pathsCardVisible = false;
 
   void _onMapCreated(GoogleMapController controller) {
     _controller = controller;
@@ -44,7 +43,11 @@ class MainPageState extends State<MainPage> {
           GoogleMap(
             onMapCreated: _onMapCreated,
             options: GoogleMapOptions(
-              mapType: MapType.normal
+              mapType: MapType.normal,
+              cameraPosition:  CameraPosition(
+                target:  LatLng(45.364171, 9.682941),
+                zoom: 11.0,
+              ),
             ),
           ),
           GestureDetector(
@@ -53,7 +56,20 @@ class MainPageState extends State<MainPage> {
             },
           ),
           SafeArea(
-            child: TopBar(),
+            child: Column(
+              children: <Widget>[
+                TopBar(onRoutesButtonClicked: () {
+                    setState(() {
+                      pathsCardVisible = !pathsCardVisible; 
+                    });
+                  },
+                ),
+                Visibility(
+                  child: RouteCard(),
+                  visible: pathsCardVisible,
+                )
+              ],
+            )
           ),
         ],
       ),
