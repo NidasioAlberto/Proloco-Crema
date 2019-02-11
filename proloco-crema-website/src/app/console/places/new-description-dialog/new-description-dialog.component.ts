@@ -16,16 +16,52 @@ export class NewDescriptionDialogComponent {
         languages: ['it', 'en'],
     }
 
-    constructor(public dialogRef: MatDialogRef<NewDescriptionDialogComponent>, @Inject(MAT_DIALOG_DATA) private inData: any, public snackBar: MatSnackBar) { }
+    mode: 'create' | 'edit' = 'create'
 
-    saveNewDescription() {
+    constructor(public dialogRef: MatDialogRef<NewDescriptionDialogComponent>, @Inject(MAT_DIALOG_DATA) private descriptionData: Description, public snackBar: MatSnackBar) {
+        //check if the dialog has been opened in edit mode
+        if(this.descriptionData != undefined) {
+            this.mode = 'edit'
+
+            Object.assign(this.description, descriptionData)
+        }
+
+        console.log(this.description)
+    }
+
+    saveDescription() {
+        console.log(this.description)
         //check the data
         if(this.description.en != undefined || this.description.it != undefined) {
-            this.description.languages = undefined
-            this.dialogRef.close(this.description)
+            //if the dialog is in edit mode
+            if(this.mode == 'edit') {
+                //check if the data has been modified
+                let modified = false
+
+                this.description.languages.forEach(language => {
+                    if(this.description[language] != this.descriptionData[language]) {
+                        modified = true
+                    }
+                })
+
+                if(modified) {
+                    console.log('data modified')
+                    this.dialogRef.close(this.description)
+                } else {
+                    this.dialogRef.close(undefined)
+                }
+            } else {
+                //the dialog was opened in create mode
+                this.dialogRef.close(this.description)
+            }
         } else {
             //show a snack bar to warn the user
-            this.snackBar.open("Fill at least one language")
+            this.snackBar.open("Fill at least one language", null, { duration: 3000 })
         }
+    }
+
+    deleteDescription() {
+        //return delete
+        this.dialogRef.close('delete')
     }
 }

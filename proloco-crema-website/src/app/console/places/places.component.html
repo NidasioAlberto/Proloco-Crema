@@ -28,15 +28,18 @@
                     </mat-form-field>
                     <!-- List of descriptions -->
                     <h3 class="mat-h3">Descrizioni</h3>
-                    <app-descriptions-list [descriptions]="place.descriptions" editable></app-descriptions-list>
+                    <app-descriptions-list [descriptions]="place.descriptions" [editable]="true" [placeId]="place.placeId"></app-descriptions-list>
                 </div>
                 <!-- place options -->
                 <div style="width: 100%; padding-top: 16px;" fxLayoutAlign="end end">
+                    <!-- Allows the user to delete the place, should show a confirm dialog-->
+                    <button mat-raised-button color="warn" style="margin: 0 8px;" (click)="deletePlace(place.placeId)">Elimina</button>
+
                     <!-- Allows the user edit the place, should shows a dialog -->
-                    <button mat-raised-button color="primary" style="margin: 0 8px;" (click)="editPlace(place)">Modifica</button>
+                    <button mat-raised-button color="primary" style="margin: 0 8px;" (click)="editPlace(place)">Modifica monumento</button>
             
                     <!-- Enable the user to add a description through a dialog -->
-                    <button mat-raised-button color="primary" style="margin-left: 8px;" (click)="addDescription(place.placeId)">Aggiungi</button>
+                    <button mat-raised-button color="primary" style="margin-left: 8px;" (click)="addDescription(place.placeId)">Aggiungi descrizione</button>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

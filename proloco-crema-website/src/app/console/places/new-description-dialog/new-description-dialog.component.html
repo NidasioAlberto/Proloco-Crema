@@ -1,6 +1,5 @@
 <h1 mat-dialog-title>Aggiungi descrizione</h1>
 <div mat-dialog-content>
-
     <mat-list>
         <mat-list-item *ngFor="let language of description.languages">
             <h3 class="language-name">{{language}}</h3>
@@ -11,6 +10,7 @@
     </mat-list>
 </div>
 <div mat-dialog-actions>
-    <button mat-button (click)="saveNewDescription()">Salva</button>
+    <button mat-button (click)="saveDescription()">Salva</button>
     <button mat-button [mat-dialog-close]="undefined">Cancella</button>
+    <button mat-button *ngIf="mode == 'edit'" color="warn" (click)="deleteDescription()">Elimina</button>
 </div>

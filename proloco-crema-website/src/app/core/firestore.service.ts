@@ -64,6 +64,7 @@ export class FirestoreService {
                     data.placeId = place.payload.doc.id
 
                     data.descriptions = this.addDescriptionLanaguagesToDescriptions(data.descriptions)
+                    console.log('langueges added to description')
 
                     return data
                 })
@@ -140,6 +141,25 @@ export class FirestoreService {
         })
     }
 
+    updatePlaceDescriptions(placeId: string, descriptions: Description[]) {
+        let tmp = [] //descriptions.slice(0)
+
+        descriptions.forEach(description => {
+            let tmp2 = {}
+            Object.assign(tmp2, description)
+            tmp.push(tmp2)
+        })
+
+        //remove languages object from descriptions
+        tmp.forEach(description => {
+            delete description.languages
+        })
+
+        return this.firestore.collection('Places').doc(placeId).update({
+            descriptions: tmp
+        })
+    }
+
     /**
      * It retrieves all the paths associated with the given association
      * @param associationId id of the association
@@ -175,5 +195,13 @@ export class FirestoreService {
                 })
             })
         )
+    }
+
+    /**
+     * It deletes a place given its id
+     * @param placeId the place id to delete
+     */
+    deletePlace(placeId: string) {
+        return this.firestore.collection('Places').doc(placeId).delete()
     }
 }

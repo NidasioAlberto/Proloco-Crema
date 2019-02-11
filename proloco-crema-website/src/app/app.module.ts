@@ -53,6 +53,7 @@ import { GOOGLE_MAPS_API_KEY } from './api-keys';
 import { PathDescriptionComponent } from './console/paths/paths-list/path-description/path-description.component';
 import { PathMapComponent } from './console/paths/paths-list/path-map/path-map.component';
 import { PathPlacesListComponent } from './console/paths/paths-list/path-description/path-places-list/path-places-list.component';
+import { DeleteConfirmDialogComponent } from './console/delete-confirm-dialog/delete-confirm-dialog.component';
 
 @NgModule({
     declarations: [
@@ -73,7 +74,8 @@ import { PathPlacesListComponent } from './console/paths/paths-list/path-descrip
         PathsListComponent,
         PathDescriptionComponent,
         PathMapComponent,
-        PathPlacesListComponent
+        PathPlacesListComponent,
+        DeleteConfirmDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -110,7 +112,7 @@ import { PathPlacesListComponent } from './console/paths/paths-list/path-descrip
         AgmDirectionModule
     ],
     entryComponents: [
-        NewPlaceDialogComponent, NewDescriptionDialogComponent
+        NewPlaceDialogComponent, NewDescriptionDialogComponent, DeleteConfirmDialogComponent
     ],
     providers: [],
     bootstrap: [AppComponent],

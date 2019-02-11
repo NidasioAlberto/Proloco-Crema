@@ -36,7 +36,7 @@ export class NewPlaceDialogComponent implements OnInit {
         if(placeToEdit != undefined) {
             this.mode = 'edit'
 
-            //copy only the title and the address to update only then when writing to the database
+            //copy only the title and the address to update only them when writing to the database
             this.outData.title = placeToEdit.title
             this.outData.address.title = placeToEdit.address.title
             if(placeToEdit.address.geopoint != undefined) {
@@ -87,6 +87,7 @@ export class NewPlaceDialogComponent implements OnInit {
                     this.zoom = 12;
 
                     //save the latitude and longiture also in outputdata
+                    this.outData.address.title = place.formatted_address
                     this.outData.address.geopoint = new firebase.firestore.GeoPoint(this.latitude, this.longitude)
                     console.log('data changed', this.outData)
                 });
