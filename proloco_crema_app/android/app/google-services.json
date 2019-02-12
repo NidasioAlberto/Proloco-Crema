@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "405138713326-ean8fvv84pk1cmi3macg3j4slldcqphk.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.prolococremaapp",
-            "certificate_hash": "e953145ebd7e4a0419b873c553d2dd088b1d95a5"
-          }
-        },
-        {
           "client_id": "405138713326-g5ttmnrp6bakq3ts9bcchfmt0sepgunp.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "405138713326-g5ttmnrp6bakq3ts9bcchfmt0sepgunp.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

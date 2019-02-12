@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RouteCard extends StatefulWidget {
   @override
@@ -22,6 +23,18 @@ class _RouteCardState extends State<RouteCard>{
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(8))
       ),
+      child: _buildBody(context),
+    );
+  }
+////////////////////////////////////////////////////////////////
+  Widget _buildBody(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('Paths').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return LinearProgressIndicator();
+
+        //return _buildList(context, snapshot.data.documents);
+      },
     );
   }
 }
