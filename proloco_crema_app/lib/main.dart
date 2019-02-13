@@ -52,7 +52,7 @@ class MainPageState extends State<MainPage> {
           ),
           GestureDetector(
             onTap: (){
-              FocusScope.of(context).requestFocus(new FocusNode());
+              FocusScope.of(context).requestFocus(new FocusNode());                
             },
           ),
           SafeArea(
@@ -65,7 +65,13 @@ class MainPageState extends State<MainPage> {
                   },
                 ),
                 Visibility(
-                  child: RouteCard(),
+                  child: RouteCard(addMarker:(){
+                    _controller.addMarker(
+                      MarkerOptions(
+                        position: LatLng(45.355139, 9.683000),
+                      )
+                    );
+                  }),
                   visible: pathsCardVisible,
                 )
               ],
