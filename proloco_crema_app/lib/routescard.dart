@@ -33,7 +33,6 @@ class _RouteCardState extends State<RouteCard>{
   }
 
   Widget _buildBody(BuildContext context) {
-    int i = 0;
     return StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance.collection('Paths').orderBy('title').snapshots(),
       builder: (context, snapshot) {

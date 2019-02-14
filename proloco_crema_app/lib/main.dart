@@ -65,6 +65,15 @@ class MainPageState extends State<MainPage> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
+          GestureDetector(
+                  onTap: (){
+                    FocusScope.of(context).requestFocus(new FocusNode());    
+                    pathsCardVisible = false;  
+                    setState(() {
+                      
+                    });         
+                  },
+                ),
           GoogleMap(
             onMapCreated: _onMapCreated,
             options: GoogleMapOptions(
@@ -74,11 +83,6 @@ class MainPageState extends State<MainPage> {
                 zoom: 11.0,
               ),
             ),
-          ),
-          GestureDetector(
-            onTap: (){
-              FocusScope.of(context).requestFocus(new FocusNode());                
-            },
           ),
           SafeArea(
             child: Column(
@@ -94,14 +98,17 @@ class MainPageState extends State<MainPage> {
                     _controller.addMarker(
                       MarkerOptions(
                         position: LatLng(45.355139, 9.683000),
-                      )
+                        draggable: false,
+                        infoWindowText: InfoWindowText('Titolo', 'tua mamma'),
+                      ),
                     );
                   }),
                   visible: pathsCardVisible,
-                )
+                ),
               ],
             )
           ),
+          
         ],
       ),
       floatingActionButton: Settings(mapChange: (mapSatellite) {
