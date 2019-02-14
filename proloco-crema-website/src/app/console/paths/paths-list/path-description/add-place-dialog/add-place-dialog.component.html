@@ -1,0 +1,7 @@
+<h1 mat-dialog-title>Seleziona un monumento da aggiungere</h1>
+<div mat-dialog-content>
+    <app-path-places-list [places]="places" (onSelected)="onSelected($event)"></app-path-places-list>
+</div>
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="undefined">Cancella</button>
+</div>

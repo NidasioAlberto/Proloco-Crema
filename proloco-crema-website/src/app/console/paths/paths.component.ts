@@ -3,6 +3,7 @@ import { Path } from 'src/app/utils/path'
 import { ActivatedRoute } from '@angular/router'
 import { FirestoreService } from 'src/app/core/firestore.service'
 import { MatDialog } from '@angular/material'
+import { PathDialogComponent } from './path-dialog/path-dialog.component';
 
 @Component({
     selector: 'app-paths',
@@ -21,6 +22,17 @@ export class PathsComponent {
             this.firestore.getPaths(this.associationId).subscribe(paths => {
                 this.paths = paths
             })
+        })
+    }
+
+    addPath() {
+        this.dialog.open(PathDialogComponent).afterClosed().subscribe((result: Path) => {
+            //check the result
+            if(result != undefined) {
+                result.association = this.associationId
+                console.log(result)
+                this.firestore.addPath(result)
+            }
         })
     }
 

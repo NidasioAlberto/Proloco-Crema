@@ -2,11 +2,11 @@
 <div mat-dialog-content>
     <div>
         <mat-form-field class="title">
-            <input matInput placeholder="Title" [(ngModel)]="outData.title">
+            <input matInput placeholder="Titolo" [(ngModel)]="outData.title">
         </mat-form-field>
         
         <mat-form-field class="address">
-            <input #search matInput placeholder="Address" [(ngModel)]="outData.address.title">
+            <input #search matInput placeholder="Indirizzo" [(ngModel)]="outData.address.title">
         </mat-form-field>
     </div>
 
@@ -14,7 +14,7 @@
         <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
     </agm-map>
 </div>
-    <div mat-dialog-actions>
+<div mat-dialog-actions>
     <button mat-button (click)="savePlace()">Salva</button>
     <button mat-button (click)="close()">Cancella</button>
 </div>

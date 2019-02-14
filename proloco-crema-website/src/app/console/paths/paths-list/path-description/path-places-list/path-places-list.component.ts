@@ -1,9 +1,5 @@
-import { Component, OnChanges, Input, SimpleChanges } from '@angular/core'
+import { Component, OnChanges, Input, SimpleChanges, EventEmitter, Output } from '@angular/core'
 import { Place } from 'src/app/utils/place'
-import { DocumentReference } from '@angular/fire/firestore';
-import { FirestoreService } from 'src/app/core/firestore.service';
-import { Subscription } from 'rxjs';
-import { Description } from 'src/app/utils/description';
 
 @Component({
     selector: 'app-path-places-list',
@@ -13,11 +9,16 @@ import { Description } from 'src/app/utils/description';
 export class PathPlacesListComponent implements OnChanges {
 
     @Input() places: Place[]
+    @Output() onSelected: EventEmitter<number> = new EventEmitter()
 
-    constructor(public firestore: FirestoreService) { }
+    constructor() { }
 
     ngOnChanges(changes: SimpleChanges) {
         this.places = changes.places.currentValue as Place[]
+    }
+
+    placeSelected(index) {
+        this.onSelected.emit(index)
     }
 
 }

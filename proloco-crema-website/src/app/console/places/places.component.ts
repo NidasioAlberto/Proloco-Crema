@@ -53,6 +53,7 @@ export class PlacesComponent {
     }
 
     deletePlace(placeId: string) {
+        console.log(placeId)
         const dialogRef = this.dialog.open(DeleteConfirmDialogComponent, {
             data: {
                 message: "Confermi di eliminare il monumento?"

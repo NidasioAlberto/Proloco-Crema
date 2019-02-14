@@ -6,10 +6,10 @@ export interface Path {
     title: Description
     description: Description
     pathId?: string
-    association?: string
+    association: string
     places?: DocumentReference[]
     placesData?: Place[]
-    order: {
+    order?: {
         type: string
     }
 }

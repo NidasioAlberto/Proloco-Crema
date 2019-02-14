@@ -1,5 +1,5 @@
 <mat-list>
-    <mat-list-item class="list-item" *ngFor="let place of places">
+    <mat-list-item class="list-item" *ngFor="let place of places" (click)="placeSelected(places.indexOf(place))">
         <!-- place number on the right -->
         <h2 style="margin: 8px;">{{places.indexOf(place)}}</h2>
 

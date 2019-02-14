@@ -54,6 +54,8 @@ import { PathDescriptionComponent } from './console/paths/paths-list/path-descri
 import { PathMapComponent } from './console/paths/paths-list/path-map/path-map.component';
 import { PathPlacesListComponent } from './console/paths/paths-list/path-description/path-places-list/path-places-list.component';
 import { DeleteConfirmDialogComponent } from './console/delete-confirm-dialog/delete-confirm-dialog.component';
+import { AddPlaceDialogComponent } from './console/paths/paths-list/path-description/add-place-dialog/add-place-dialog.component';
+import { PathDialogComponent } from './console/paths/path-dialog/path-dialog.component';
 
 @NgModule({
     declarations: [
@@ -75,7 +77,9 @@ import { DeleteConfirmDialogComponent } from './console/delete-confirm-dialog/de
         PathDescriptionComponent,
         PathMapComponent,
         PathPlacesListComponent,
-        DeleteConfirmDialogComponent
+        DeleteConfirmDialogComponent,
+        AddPlaceDialogComponent,
+        PathDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -112,7 +116,11 @@ import { DeleteConfirmDialogComponent } from './console/delete-confirm-dialog/de
         AgmDirectionModule
     ],
     entryComponents: [
-        NewPlaceDialogComponent, NewDescriptionDialogComponent, DeleteConfirmDialogComponent
+        NewPlaceDialogComponent,
+        NewDescriptionDialogComponent,
+        DeleteConfirmDialogComponent,
+        AddPlaceDialogComponent,
+        PathDialogComponent
     ],
     providers: [],
     bootstrap: [AppComponent],

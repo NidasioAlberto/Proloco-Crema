@@ -3,7 +3,7 @@ import { AngularFirestore, associateQuery, DocumentReference } from '@angular/fi
 import { AuthService } from './auth.service'
 import { Observable, Observer } from 'rxjs'
 import { UserData, Association } from '../utils/user-data'
-import { map, first, take } from 'rxjs/operators'
+import { map, first, take, filter } from 'rxjs/operators'
 import { Place } from '../utils/place'
 import { Description } from '../utils/description'
 import * as firebase from 'firebase/app'
@@ -54,8 +54,27 @@ export class FirestoreService {
      * @param associationId id of the association
      * @returns an observable of places
      */
-    getPlaces(associationId: string) {
-        return this.firestore.collection('Places', ref => ref.where('association', '==', associationId)).snapshotChanges().pipe(
+    getPlaces(associationId: string, path?: Path) {
+        let ref: Observable<any[]>
+        
+        if(path != undefined) {
+            let placesIds: string[] = []
+    
+            if(path.places != undefined) path.places.forEach(place => {
+                placesIds.push(place.id)
+            })
+            //if the filter is defined get all the places that are not in the specified path
+            ref = this.firestore.collection('Places', ref => ref.where('association', '==', associationId)).snapshotChanges().pipe(
+                map(places => {
+                    return places.filter(place => {
+                        return placesIds.indexOf(place.payload.doc.id) == -1//place.payload.doc in path.places
+                    })
+                })
+            )
+        } else {
+            ref = this.firestore.collection('Places', ref => ref.where('association', '==', associationId)).snapshotChanges()
+        }
+        return ref.pipe(
             map(places => {
                 return places.map(place => {
                     var data = place.payload.doc.data() as Place
@@ -70,6 +89,14 @@ export class FirestoreService {
                 })
             })
         )
+    }
+
+    /**
+     * Retrieve the data of a path
+     * @param pathId
+     */
+    getPath(pathId: string) {
+        return this.firestore.collection('Paths').doc<Path>(pathId).valueChanges().toPromise()
     }
 
     /**
@@ -182,7 +209,7 @@ export class FirestoreService {
 
                     //retrieve the places data
                     var promises = []
-                    data.places.forEach(place => {
+                    if(data.places != undefined) data.places.forEach(place => {
                         this.firestore.doc<Place>(place).valueChanges().pipe(
                             take(1)
                         ).subscribe(placeData => {
@@ -203,5 +230,44 @@ export class FirestoreService {
      */
     deletePlace(placeId: string) {
         return this.firestore.collection('Places').doc(placeId).delete()
+    }
+
+    /**
+     * It deletes a path given its id
+     * @param pathId the path id to delete
+     */
+    deletePath(pathId: string) {
+        return this.firestore.collection('Paths').doc(pathId).delete()
+    }
+
+    //removePlaceFromPath(pathId: string, placeId: string)
+
+    /**
+     * It adds the place reference to the path data
+     * @param pathId the path id
+     * @param placeId the palace id to add
+     */
+    addPlaceToPath(pathId: string, placeId: string) {
+        return this.firestore.collection('Paths').doc(pathId).update({
+            places: firebase.firestore.FieldValue.arrayUnion(this.firestore.collection('Places').doc(placeId).ref)
+        })
+    }
+
+    /**
+     * Add a new path in the database
+     * @param path 
+     */
+    addPath(path: Path) {
+        this.firestore.collection('Paths').add(path)
+    }
+
+    updatePath(pathData: Path, pathId: string) {
+        return this.firestore.collection('Paths').doc(pathId).update(pathData)
+    }
+
+    removePlaceFromPath(pathId: string, placeRef: DocumentReference) {
+        return this.firestore.collection('Paths').doc(pathId).update({
+            places: firebase.firestore.FieldValue.arrayRemove(placeRef)
+        })
     }
 }
