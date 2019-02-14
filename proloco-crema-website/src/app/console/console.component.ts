@@ -13,15 +13,11 @@ export class ConsoleComponent {
     association: Association = null
     links = [
         {
-            lable: 'Summary',
-            route: 'summary',
-        },
-        {
-            lable: 'Paths',
+            lable: 'Percorsi',
             route: 'paths',
         },
         {
-            lable: 'Places',
+            lable: 'Monumenti',
             route: 'places',
         } 
     ]
