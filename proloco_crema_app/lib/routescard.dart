@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'allTranslations.dart';
 
 class RouteCard extends StatefulWidget {
 
@@ -18,6 +19,8 @@ class _RouteCardState extends State<RouteCard>{
   void initState(){
     super.initState();
   }
+
+  String language = allTranslations.currentLanguage;
 
   @override
   Widget build(BuildContext context){
@@ -48,8 +51,8 @@ class _RouteCardState extends State<RouteCard>{
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(snapshot.data.documents[index]['title']['it']),
-                        Text(snapshot.data.documents[index]['description']['it'],style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.75)),
+                        Text(snapshot.data.documents[index]['title'][language]),
+                        Text(snapshot.data.documents[index]['description'][language],style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.75)),
                       ],
                     )
                   ],

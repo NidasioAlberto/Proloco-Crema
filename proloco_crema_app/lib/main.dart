@@ -59,6 +59,8 @@ class MainPageState extends State<MainPage> {
         // do anything you need to do if the language changes
         print('Language has been changed to: ${allTranslations.currentLanguage}');
     }
+  
+  String language = allTranslations.currentLanguage;
 
   @override
   Widget build(BuildContext context) {
@@ -120,6 +122,9 @@ class MainPageState extends State<MainPage> {
         });
       }, audioChange: (audiooff){
 
+      }, languageChange: (language){
+        this.language = language;
+        setState((){});
       }),
     );
   }

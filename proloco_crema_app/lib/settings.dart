@@ -4,8 +4,9 @@ import 'allTranslations.dart';
 class Settings extends StatefulWidget {
   Function(bool) mapChange;
   Function(bool) audioChange;
+  Function(String) languageChange;
 
-  Settings({Key key, this.mapChange, this.audioChange}) : super(key: key);
+  Settings({Key key, this.mapChange, this.audioChange, this.languageChange}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => SettingsState();
@@ -19,13 +20,11 @@ class SettingsState extends State<Settings> with TickerProviderStateMixin {
 
   //impostazione mappa stellite / mappa normale
   bool mapSatellite = true;
-  IconData mapIcon = Icons.layers;
+  IconData mapIcon = Icons.layers_clear;
 
   //impostazione audio off / audio on
   bool audiooff= true;
-  IconData audioIcon = Icons.volume_up;
-
-  final String language = allTranslations.currentLanguage;
+  IconData audioIcon = Icons.volume_off;
 
   Animation<RelativeRect> panelAnimation;
   
@@ -56,9 +55,8 @@ class SettingsState extends State<Settings> with TickerProviderStateMixin {
     if(lang != null){
       await allTranslations.setNewLanguage(lang);
       setState((){});
-      print("2");
+      widget.languageChange(lang);
     }
-    print(lang +"1");
   }
 
   @override
@@ -105,11 +103,11 @@ class SettingsState extends State<Settings> with TickerProviderStateMixin {
                   onPressed: () {
                     setState(() {
                       if(audiooff) {
-                        audiooff = true;
-                        audioIcon = Icons.volume_up;
-                      } else {
                         audiooff = false;
-                        audioIcon = Icons.volume_off;              
+                        audioIcon = Icons.volume_off;
+                      } else {
+                        audiooff = true;
+                        audioIcon = Icons.volume_up;              
                       }
                       widget.audioChange(audiooff);
                     });
@@ -124,11 +122,11 @@ class SettingsState extends State<Settings> with TickerProviderStateMixin {
                   onPressed: () {
                     setState(() {
                       if(mapSatellite) {
-                        mapSatellite = true;
-                        mapIcon = Icons.layers;
-                      } else {
                         mapSatellite = false;
-                        mapIcon = Icons.layers_clear;              
+                        mapIcon = Icons.layers_clear;
+                      } else {
+                        mapSatellite = true;
+                        mapIcon = Icons.layers;              
                       }
                       widget.mapChange(mapSatellite);
                     });
