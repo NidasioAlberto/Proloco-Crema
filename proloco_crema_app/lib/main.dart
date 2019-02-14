@@ -3,8 +3,14 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'topbar.dart';
 import 'settings.dart';
 import 'routescard.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'allTranslations.dart';
 
-void main() => runApp(new MyApp());
+Future main() async {
+  await allTranslations.init();
+
+  runApp(new MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -14,6 +20,11 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: allTranslations.supportedLocales(),
       home: new MainPage(),
     );
   }
@@ -34,6 +45,20 @@ class MainPageState extends State<MainPage> {
     _controller = controller;
     print('map created');
   }
+
+  @override
+    void initState(){
+        super.initState();
+
+        // Initializes a callback should something need 
+        // to be done when the language is changed
+        allTranslations.onLocaleChangedCallback = _onLocaleChanged;
+    }
+
+    _onLocaleChanged() async {
+        // do anything you need to do if the language changes
+        print('Language has been changed to: ${allTranslations.currentLanguage}');
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +118,9 @@ class MainPageState extends State<MainPage> {
             print("map changed to normal view");
           }
         });
-      },),
+      }, audioChange: (audiooff){
+
+      }),
     );
   }
 }
