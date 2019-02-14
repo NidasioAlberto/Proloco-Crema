@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+    <span>Proloco Crema</span>
+
+    <!-- taps buttons -->
+    <div fxFlex fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px" fxHide.sx>
+        <button mat-button *ngFor="let link of links" [routerLink]="link.route">{{link.lable}}</button>
+    </div>
+
+    <!-- login icon button -->
+    <button mat-icon-button>
+        <mat-icon *ngIf="userPhotoUrl == null" aria-label="Login into your account" (click)="login()">account_circle</mat-icon>
+        <img  *ngIf="userPhotoUrl != null" src="{{userPhotoUrl}}" style="height:75%; border-radius: 50%" (click)="showUserProfile()">
+    </button>
+</mat-toolbar>
+
+<!-- child component will be shown here -->
+<router-outlet></router-outlet>

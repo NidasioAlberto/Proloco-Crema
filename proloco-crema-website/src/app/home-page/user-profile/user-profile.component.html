@@ -1,0 +1,28 @@
+<div style="padding: 100px">
+    <mat-card *ngIf="user != null">
+        <mat-card-header>
+            <mat-card-title>{{user.displayName}}</mat-card-title>
+            <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            Here you will find your profile sumary
+            
+            <mat-list>
+                <div *ngFor="let association of associations">
+                    <mat-list-item>
+                        <h3 mat-line>{{association.name}}</h3>
+                        <p mat-line>
+                            <span>{{association.city}}</span>
+                        </p>
+                        <button mat-raised-button (click)="goToConsole(association.id)">Go to console</button>
+                    </mat-list-item>
+                    <mat-divider *ngIf="associations.indexOf(association) < associations.length - 1"></mat-divider>
+                </div>
+            </mat-list>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button *ngIf="userRole == 'admin'" (click)="goToConsole()">Go to console</button>
+            <button mat-button (click)="logout()">Logout</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

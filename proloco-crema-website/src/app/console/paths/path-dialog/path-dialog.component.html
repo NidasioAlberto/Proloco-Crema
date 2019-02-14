@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Crea un nuovo percorso</h1>
+<div mat-dialog-content>
+    <div>
+        <mat-form-field class="title">
+            <input matInput placeholder="Titolo" [(ngModel)]="outData.title.it">
+        </mat-form-field>
+        
+        <mat-form-field class="description">
+            <input #search matInput placeholder="Descrizione" [(ngModel)]="outData.description.it">
+        </mat-form-field>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="savePath()">Salva</button>
+    <button mat-button [mat-dialog-close]="undefined">Cancella</button>
+</div>

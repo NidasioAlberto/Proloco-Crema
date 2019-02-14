@@ -1,0 +1,31 @@
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let path of paths" (opened)="panleOpened(paths.indexOf(path))">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{path.title[path.title.languages[0]]}}
+            </mat-panel-title>
+            <mat-panel-description>
+                {{path.description[path.description.languages[0]]}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-tab-group mat-stretch-tabs>
+            <mat-tab label="Data">
+                <app-path-description [path]="path"></app-path-description>
+            </mat-tab>
+            <mat-tab label="Map">
+                <app-path-map [places]="path.placesData"></app-path-map>
+            </mat-tab>
+        </mat-tab-group>
+        <!-- place options -->
+        <div style="width: 100%; padding-top: 16px;" fxLayoutAlign="end end">
+            <!-- Allows the user to delete the place, should show a confirm dialog-->
+            <button mat-raised-button color="warn" style="margin: 0 8px;" (click)="deletePath(path.pathId)">Elimina</button>
+
+            <!-- Allows the user edit the place, should shows a dialog -->
+            <button mat-raised-button color="primary" style="margin: 0 8px;" (click)="editPath(path)">Modifica percorso</button>
+    
+            <!-- Enable the user to add a description through a dialog -->
+            <button mat-raised-button color="primary" style="margin-left: 8px;" (click)="addPlace(path)">Aggiungi monumento</button>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

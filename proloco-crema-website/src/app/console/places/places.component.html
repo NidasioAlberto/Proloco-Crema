@@ -1,0 +1,47 @@
+<div style="padding: 100px">
+    <mat-card class="mat-elevation-z16">
+        <mat-card-header>
+            <mat-card-title>Monumenti</mat-card-title>
+            <span style="flex: 1 1 auto;"></span>
+
+            <!-- Opens a dialog to add a new place -->
+            <button mat-raised-button color="primary" (click)="addPlace()">Aggiungi</button>
+        </mat-card-header>
+
+        <div style="height: 16px;"></div>
+
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let place of places">
+                <!-- Expansion panel title and description -->
+                <mat-expansion-panel-header>
+                    <mat-panel-title>{{place.title}}</mat-panel-title>
+                    <mat-panel-description>{{place.address.title}}</mat-panel-description>
+                </mat-expansion-panel-header>
+                <div *ngIf="place.descriptions != null">
+                    <!-- This select sets the default description -->
+                    <mat-form-field>
+                        <mat-select placeholder="Default descriptions" [(value)]="place.defaultDescription" (selectionChange)="changeDefaultDescription(places.indexOf(place), place.defaultDescription)">
+                            <mat-option *ngFor="let description of place.descriptions" [value]="place.descriptions.indexOf(description)">
+                                {{place.descriptions.indexOf(description)}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <!-- List of descriptions -->
+                    <h3 class="mat-h3">Descrizioni</h3>
+                    <app-descriptions-list [descriptions]="place.descriptions" [editable]="true" [placeId]="place.placeId"></app-descriptions-list>
+                </div>
+                <!-- place options -->
+                <div style="width: 100%; padding-top: 16px;" fxLayoutAlign="end end">
+                    <!-- Allows the user to delete the place, should show a confirm dialog-->
+                    <button mat-raised-button color="warn" style="margin: 0 8px;" (click)="deletePlace(place.placeId)">Elimina</button>
+
+                    <!-- Allows the user edit the place, should shows a dialog -->
+                    <button mat-raised-button color="primary" style="margin: 0 8px;" (click)="editPlace(place)">Modifica monumento</button>
+            
+                    <!-- Enable the user to add a description through a dialog -->
+                    <button mat-raised-button color="primary" style="margin-left: 8px;" (click)="addDescription(place.placeId)">Aggiungi descrizione</button>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-card>
+</div>
