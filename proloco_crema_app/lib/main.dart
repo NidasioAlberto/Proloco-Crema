@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'topbar.dart';
 import 'settings.dart';
+import 'routescard.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'allTranslations.dart';
 
@@ -37,14 +39,11 @@ class MainPage extends StatefulWidget {
 
 class MainPageState extends State<MainPage> {
   GoogleMapController _controller;
+  bool pathsCardVisible = false;
 
   void _onMapCreated(GoogleMapController controller) {
     _controller = controller;
     print('map created');
-  }
-
-  void _onSettingsButtonPressed() {
-    print('settings button pressed');
   }
 
   @override
@@ -64,11 +63,46 @@ class MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        onMapCreated: _onMapCreated,
-        options: GoogleMapOptions(
-          mapType: MapType.normal
-        ),
+      body: Stack(
+        children: <Widget>[
+          GoogleMap(
+            onMapCreated: _onMapCreated,
+            options: GoogleMapOptions(
+              mapType: MapType.normal,
+              cameraPosition:  CameraPosition(
+                target:  LatLng(45.364171, 9.682941),
+                zoom: 11.0,
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: (){
+              FocusScope.of(context).requestFocus(new FocusNode());                
+            },
+          ),
+          SafeArea(
+            child: Column(
+              children: <Widget>[
+                TopBar(onRoutesButtonClicked: () {
+                    setState(() {
+                      pathsCardVisible = !pathsCardVisible; 
+                    });
+                  },
+                ),
+                Visibility(
+                  child: RouteCard(addMarker:(){
+                    _controller.addMarker(
+                      MarkerOptions(
+                        position: LatLng(45.355139, 9.683000),
+                      )
+                    );
+                  }),
+                  visible: pathsCardVisible,
+                )
+              ],
+            )
+          ),
+        ],
       ),
       floatingActionButton: Settings(mapChange: (mapSatellite) {
         setState(() {
