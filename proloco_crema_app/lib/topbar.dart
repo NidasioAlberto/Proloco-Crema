@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'allTranslations.dart';
+
 
 class TopBar extends StatefulWidget {
   Function onRoutesButtonClicked;
@@ -40,7 +42,7 @@ class _TopBarState extends State<TopBar> {
                   padding: EdgeInsets.only(left: 10.0),
                   child: TextField(
                     decoration: InputDecoration.collapsed(
-                      hintText: "Cerca",
+                      hintText: allTranslations.text('search'),
                       hintStyle: TextStyle(
                         fontSize: 20
                       )
@@ -51,14 +53,14 @@ class _TopBarState extends State<TopBar> {
               ),
               IconButton(
                 icon: Icon(Icons.directions_run),
-                tooltip: "Percorsi",
+                tooltip: allTranslations.text('route_tooltip'),
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onPressed: () => widget.onRoutesButtonClicked() ,
               ),
               IconButton(
                 icon: Icon(Icons.account_balance),
-                tooltip: "Monumenti",
+                tooltip: allTranslations.text('place_tooltip'),
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onPressed: () => widget.onMonumentsButtonClicked(),
