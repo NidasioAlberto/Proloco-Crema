@@ -44,6 +44,7 @@ class _TopBarState extends State<TopBar> {
                         fontSize: 20
                       )
                     ),
+                    
                   ),
                 ),
               ),

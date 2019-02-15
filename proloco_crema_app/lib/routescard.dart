@@ -33,6 +33,23 @@ class _RouteCardState extends State<RouteCard>{
   }
 
   Widget _buildBody(BuildContext context) {
+
+    Future function(String spl) async{
+      DocumentSnapshot ds = await Firestore.instance.collection('Places').document(spl).get();
+      print(ds['title']);
+      widget.addMarker(ds); 
+      return null;     
+    }
+
+    void _markers(AsyncSnapshot<QuerySnapshot> s, int i){
+      for(int j = 0; j<s.data.documents[i]['places'].length;j++){
+        String p=s.data.documents[i]['places'][j].path; 
+        List<String> split = p.split('/');
+        print(split[1]);
+        function(split[1]);
+      }
+    }
+
     return StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance.collection('Paths').orderBy('title').snapshots(),
       builder: (context, snapshot) {
@@ -54,7 +71,7 @@ class _RouteCardState extends State<RouteCard>{
                   ],
                 ),
               ),
-              onTap:() => widget.addMarker(),
+              onTap:() => _markers(snapshot,index),
               ),
             );
           },

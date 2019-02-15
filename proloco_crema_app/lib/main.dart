@@ -5,6 +5,7 @@ import 'settings.dart';
 import 'routescard.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'allTranslations.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future main() async {
   await allTranslations.init();
@@ -65,15 +66,6 @@ class MainPageState extends State<MainPage> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          GestureDetector(
-                  onTap: (){
-                    FocusScope.of(context).requestFocus(new FocusNode());    
-                    pathsCardVisible = false;  
-                    setState(() {
-                      
-                    });         
-                  },
-                ),
           GoogleMap(
             onMapCreated: _onMapCreated,
             options: GoogleMapOptions(
@@ -84,6 +76,7 @@ class MainPageState extends State<MainPage> {
               ),
             ),
           ),
+          
           SafeArea(
             child: Column(
               children: <Widget>[
@@ -94,12 +87,17 @@ class MainPageState extends State<MainPage> {
                   },
                 ),
                 Visibility(
-                  child: RouteCard(addMarker:(){
+                  child: RouteCard(addMarker:(DocumentSnapshot ds){
+                    pathsCardVisible = false;
+                    _controller.clearMarkers();
+                    setState(() {
+                      
+                    });
                     _controller.addMarker(
                       MarkerOptions(
-                        position: LatLng(45.355139, 9.683000),
+                        position: LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude),
                         draggable: false,
-                        infoWindowText: InfoWindowText('Titolo', 'tua mamma'),
+                        infoWindowText: InfoWindowText(ds['title'], ds['descriptions'][0]['it']),
                       ),
                     );
                   }),
