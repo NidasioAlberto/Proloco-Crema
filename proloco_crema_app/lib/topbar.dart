@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class TopBar extends StatefulWidget {
   Function onRoutesButtonClicked;
+  Function onMonumentsButtonClicked;
 
-  TopBar({Key key, this.onRoutesButtonClicked}) : super(key: key);
+  TopBar({Key key, this.onRoutesButtonClicked,this.onMonumentsButtonClicked}) : super(key: key);
 
   @override
   _TopBarState createState() {
@@ -60,7 +61,7 @@ class _TopBarState extends State<TopBar> {
                 tooltip: "Monumenti",
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
-                onPressed: () => print("places"),
+                onPressed: () => widget.onMonumentsButtonClicked(),
               )
             ],
           ),

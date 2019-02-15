@@ -53,7 +53,8 @@ class _RouteCardState extends State<RouteCard>{
     return StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance.collection('Paths').orderBy('title').snapshots(),
       builder: (context, snapshot) {
-        return ListView.builder(
+        if(snapshot.hasData){
+          return ListView.builder(
           itemBuilder: ( contextt ,index){
             return new Card(
               child: InkWell(
@@ -77,6 +78,21 @@ class _RouteCardState extends State<RouteCard>{
           },
           itemCount: snapshot.data.documents.length,
         );
+        }else{
+          return Container(
+                height: 35,
+                child: new Row(
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text('Caricamento'),
+                      ],
+                    )
+                  ],
+                ),
+              );
+        }
       },
     );
   }

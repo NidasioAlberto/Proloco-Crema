@@ -6,6 +6,7 @@ import 'routescard.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'allTranslations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'monumentscard.dart';
 
 Future main() async {
   await allTranslations.init();
@@ -41,6 +42,7 @@ class MainPage extends StatefulWidget {
 class MainPageState extends State<MainPage> {
   GoogleMapController _controller;
   bool pathsCardVisible = false;
+  bool monumentsCardVisible =false;
 
   void _onMapCreated(GoogleMapController controller) {
     _controller = controller;
@@ -83,6 +85,13 @@ class MainPageState extends State<MainPage> {
                 TopBar(onRoutesButtonClicked: () {
                     setState(() {
                       pathsCardVisible = !pathsCardVisible; 
+                      monumentsCardVisible = false;
+                    });
+                  },
+                  onMonumentsButtonClicked: (){
+                    setState(() {
+                      monumentsCardVisible = !monumentsCardVisible;
+                      pathsCardVisible = false;
                     });
                   },
                 ),
@@ -103,6 +112,10 @@ class MainPageState extends State<MainPage> {
                   }),
                   visible: pathsCardVisible,
                 ),
+                Visibility(
+                  child: MonumentsCard(),
+                  visible: monumentsCardVisible,
+                )
               ],
             )
           ),
