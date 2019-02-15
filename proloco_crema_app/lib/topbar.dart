@@ -4,7 +4,9 @@ import 'allTranslations.dart';
 
 class TopBar extends StatefulWidget {
   Function onRoutesButtonClicked;
-  TopBar({Key key, this.onRoutesButtonClicked}) : super(key: key);
+  Function onMonumentsButtonClicked;
+
+  TopBar({Key key, this.onRoutesButtonClicked,this.onMonumentsButtonClicked}) : super(key: key);
 
   @override
   _TopBarState createState() {
@@ -45,6 +47,7 @@ class _TopBarState extends State<TopBar> {
                         fontSize: 20
                       )
                     ),
+                    
                   ),
                 ),
               ),
@@ -60,7 +63,7 @@ class _TopBarState extends State<TopBar> {
                 tooltip: allTranslations.text('place_tooltip'),
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
-                onPressed: () => print("places"),
+                onPressed: () => widget.onMonumentsButtonClicked(),
               )
             ],
           ),

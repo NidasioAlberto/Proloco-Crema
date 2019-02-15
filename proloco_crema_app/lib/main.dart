@@ -5,6 +5,8 @@ import 'settings.dart';
 import 'routescard.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'allTranslations.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'monumentscard.dart';
 
 Future main() async {
   await allTranslations.init();
@@ -40,6 +42,7 @@ class MainPage extends StatefulWidget {
 class MainPageState extends State<MainPage> {
   GoogleMapController _controller;
   bool pathsCardVisible = false;
+  bool monumentsCardVisible =false;
 
   void _onMapCreated(GoogleMapController controller) {
     _controller = controller;
@@ -77,33 +80,48 @@ class MainPageState extends State<MainPage> {
               ),
             ),
           ),
-          GestureDetector(
-            onTap: (){
-              FocusScope.of(context).requestFocus(new FocusNode());                
-            },
-          ),
+          
           SafeArea(
             child: Column(
               children: <Widget>[
                 TopBar(onRoutesButtonClicked: () {
                     setState(() {
                       pathsCardVisible = !pathsCardVisible; 
+                      monumentsCardVisible = false;
+                    });
+                  },
+                  onMonumentsButtonClicked: (){
+                    setState(() {
+                      monumentsCardVisible = !monumentsCardVisible;
+                      pathsCardVisible = false;
                     });
                   },
                 ),
                 Visibility(
-                  child: RouteCard(addMarker:(){
+                  child: RouteCard(addMarker:(DocumentSnapshot ds){
+                    pathsCardVisible = false;
+                    _controller.clearMarkers();
+                    setState(() {
+                      
+                    });
                     _controller.addMarker(
                       MarkerOptions(
-                        position: LatLng(45.355139, 9.683000),
-                      )
+                        position: LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude),
+                        draggable: false,
+                        infoWindowText: InfoWindowText(ds['title'], ds['descriptions'][0]['it']),
+                      ),
                     );
                   }),
                   visible: pathsCardVisible,
+                ),
+                Visibility(
+                  child: MonumentsCard(),
+                  visible: monumentsCardVisible,
                 )
               ],
             )
           ),
+          
         ],
       ),
       floatingActionButton: Settings(mapChange: (mapSatellite) {
