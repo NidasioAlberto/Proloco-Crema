@@ -89,7 +89,7 @@ class _RouteCardState extends State<RouteCard>{
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('Caricamento'),
+                        Text('Loading...'),
                       ],
                     )
                   ],

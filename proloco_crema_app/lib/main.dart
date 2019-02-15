@@ -108,7 +108,7 @@ class MainPageState extends State<MainPage> {
                       MarkerOptions(
                         position: LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude),
                         draggable: false,
-                        infoWindowText: InfoWindowText(ds['title'], ds['descriptions'][0]['it']),
+                        infoWindowText: InfoWindowText(ds['title'], ds['descriptions'][0][language]),
                       ),
                     );
                   }),

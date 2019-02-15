@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'allTranslations.dart';
 
 class MonumentsCard extends StatefulWidget {
   @override
@@ -13,6 +14,8 @@ class _MonumentsCardState extends State<MonumentsCard>{
   void initState(){
     super.initState();
   }
+  
+  String language = allTranslations.currentLanguage;
 
   @override
   Widget build(BuildContext context){
@@ -44,7 +47,7 @@ class _MonumentsCardState extends State<MonumentsCard>{
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(snapshot.data.documents[index]['title']),
-                        Text(snapshot.data.documents[index]['descriptions'][0]['it'],style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.75)),
+                        Text(snapshot.data.documents[index]['descriptions'][0][language],style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.75)),
                       ],
                     )
                   ],
@@ -62,7 +65,7 @@ class _MonumentsCardState extends State<MonumentsCard>{
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('Caricamento...'),
+                  Text('Loading...'),
                 ],
               )
             ],
