@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'allTranslations.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 
 class TopBar extends StatefulWidget {
   Function onRoutesButtonClicked;
@@ -22,6 +22,15 @@ class _TopBarState extends State<TopBar> {
 
   @override
   Widget build(BuildContext context) {
+
+    _launchURL() async {
+      const url = 'https://flutter.io';
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        throw 'Could not launch $url';
+      }
+    }
     return Container(
       padding: EdgeInsets.all(4),
       margin: EdgeInsets.all(16),
@@ -50,6 +59,12 @@ class _TopBarState extends State<TopBar> {
                     
                   ),
                 ),
+              ),
+              IconButton(
+                icon: Icon(Icons.local_airport),
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onPressed: () =>_launchURL(),
               ),
               IconButton(
                 icon: Icon(Icons.directions_run),

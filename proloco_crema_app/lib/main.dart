@@ -7,6 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'allTranslations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'monumentscard.dart';
+import 'monumentsDescriptionCard.dart'
 
 Future main() async {
   await allTranslations.init();
@@ -43,6 +44,7 @@ class MainPageState extends State<MainPage> {
   GoogleMapController _controller;
   bool pathsCardVisible = false;
   bool monumentsCardVisible =false;
+  bool monumentsDescriptionCardVisible = false;
 
   void _onMapCreated(GoogleMapController controller) {
     _controller = controller;
@@ -88,6 +90,7 @@ class MainPageState extends State<MainPage> {
                     setState(() {
                       pathsCardVisible = !pathsCardVisible; 
                       monumentsCardVisible = false;
+                      
                     });
                   },
                   onMonumentsButtonClicked: (){
@@ -109,7 +112,7 @@ class MainPageState extends State<MainPage> {
                         position: LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude),
                         draggable: false,
                         infoWindowText: InfoWindowText(ds['title'], ds['descriptions'][0][language]),
-                      ),
+                      )
                     );
                   }),
                   visible: pathsCardVisible,
@@ -117,11 +120,14 @@ class MainPageState extends State<MainPage> {
                 Visibility(
                   child: MonumentsCard(),
                   visible: monumentsCardVisible,
+                ),
+                Visibility(
+                  child: MonumentDescriptionCard(),
+                  visible: monumentsDescriptionCardVisible,
                 )
               ],
             )
           ),
-          
         ],
       ),
       floatingActionButton: Settings(mapChange: (mapSatellite) {
