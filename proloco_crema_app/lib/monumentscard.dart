@@ -3,6 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'allTranslations.dart';
 
 class MonumentsCard extends StatefulWidget {
+
+  Function placeMarker;
+
+  MonumentsCard({Key key, this.placeMarker}) : super(key: key);
+
+
   @override
   _MonumentsCardState createState(){
     return _MonumentsCardState();
@@ -31,6 +37,27 @@ class _MonumentsCardState extends State<MonumentsCard>{
   }
 
   Widget _buildBody(BuildContext context) {
+
+    Future function(AsyncSnapshot<QuerySnapshot> s,int i) async{
+      String p=s.data.documents[i].documentID;
+      print(s.data.documents[i].documentID);
+      DocumentSnapshot ds = await Firestore.instance.collection('Places').document(p).get();
+      widget.placeMarker(ds); 
+      return null;
+    }
+
+/*
+    
+
+    void _markers(AsyncSnapshot<QuerySnapshot> s, int i){
+      for(int j = 0; j<s.data.documents[i]['places'].length;j++){
+        String p=s.data.documents[i]['places'][j].path; 
+        List<String> split = p.split('/');
+        print(split[1]);
+        function(split[1]);
+      }
+    }
+*/
     return StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance.collection('Places').orderBy('title').snapshots(),
       builder: (context, snapshot) {
@@ -53,6 +80,7 @@ class _MonumentsCardState extends State<MonumentsCard>{
                   ],
                 ),
               ),
+              onTap:() => function(snapshot,index),
               ),
             );            
           },
