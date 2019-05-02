@@ -7,7 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'allTranslations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'monumentscard.dart';
-import 'monumentsDescriptionCard.dart'
+import 'monumentsDescriptionCard.dart';
 
 Future main() async {
   await allTranslations.init();
