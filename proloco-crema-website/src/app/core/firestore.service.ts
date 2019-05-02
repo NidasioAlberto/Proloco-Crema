@@ -160,6 +160,10 @@ export class FirestoreService {
         return this.firestore.collection('Places').doc(placeId).update(toUpdate)
     }
 
+    setPhotoUrlToPlace(placeId: string, photoUrl: string) {
+        return this.updatePlace(placeId, { photoUrl } as Place)
+    }
+
     addDescription(placeId: string, description: Description) {
         delete description.languages
 

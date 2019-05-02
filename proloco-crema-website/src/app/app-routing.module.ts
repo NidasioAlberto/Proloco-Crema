@@ -10,9 +10,8 @@ import { UserProfileComponent } from './home-page/user-profile/user-profile.comp
 
 import { AuthGuard } from './core/auth.guard'
 import { ConsoleComponent } from './console/console.component'
-import { SummaryComponent } from './console/summary/summary.component';
-import { PathsComponent } from './console/paths/paths.component';
-import { PlacesComponent } from './console/places/places.component';
+import { PathsComponent } from './console/paths/paths.component'
+import { PlacesComponent } from './console/places/places.component'
 
 const routes: Routes = [
     {
@@ -53,12 +52,8 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'summary',
+                redirectTo: 'paths',
                 pathMatch: 'full'
-            },
-            {
-                path: 'summary',
-                component: SummaryComponent
             },
             {
                 path: 'paths',

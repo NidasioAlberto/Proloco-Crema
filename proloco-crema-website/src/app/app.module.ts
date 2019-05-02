@@ -33,6 +33,7 @@ import { LoginComponent } from './home-page/login/login.component'
 import { AngularFireModule } from '@angular/fire'
 import { AngularFireAuthModule } from '@angular/fire/auth'
 import { AngularFirestoreModule } from '@angular/fire/firestore'
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 //google maps
 import { AgmCoreModule } from '@agm/core'
@@ -42,7 +43,6 @@ import { AgmDirectionModule } from 'agm-direction'
 import { environment } from '../environments/environment'
 import { UserProfileComponent } from './home-page/user-profile/user-profile.component'
 import { ConsoleComponent } from './console/console.component'
-import { SummaryComponent } from './console/summary/summary.component'
 import { PathsComponent } from './console/paths/paths.component'
 import { PlacesComponent } from './console/places/places.component'
 import { NewPlaceDialogComponent } from './console/places/new-place-dialog/new-place-dialog.component'
@@ -56,6 +56,7 @@ import { PathPlacesListComponent } from './console/paths/paths-list/path-descrip
 import { DeleteConfirmDialogComponent } from './console/delete-confirm-dialog/delete-confirm-dialog.component';
 import { AddPlaceDialogComponent } from './console/paths/paths-list/path-description/add-place-dialog/add-place-dialog.component';
 import { PathDialogComponent } from './console/paths/path-dialog/path-dialog.component';
+import { PhotoDialogComponent } from './console/places/photo-dialog/photo-dialog.component';
 
 @NgModule({
     declarations: [
@@ -67,7 +68,6 @@ import { PathDialogComponent } from './console/paths/path-dialog/path-dialog.com
         LoginComponent,
         UserProfileComponent,
         ConsoleComponent,
-        SummaryComponent,
         PathsComponent,
         PlacesComponent,
         NewPlaceDialogComponent,
@@ -79,7 +79,8 @@ import { PathDialogComponent } from './console/paths/path-dialog/path-dialog.com
         PathPlacesListComponent,
         DeleteConfirmDialogComponent,
         AddPlaceDialogComponent,
-        PathDialogComponent
+        PathDialogComponent,
+        PhotoDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -93,6 +94,7 @@ import { PathDialogComponent } from './console/paths/path-dialog/path-dialog.com
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireAuthModule,
         AngularFirestoreModule,
+        AngularFireStorageModule,
         //material components
         MatToolbarModule,
         MatButtonModule,
@@ -120,7 +122,8 @@ import { PathDialogComponent } from './console/paths/path-dialog/path-dialog.com
         NewDescriptionDialogComponent,
         DeleteConfirmDialogComponent,
         AddPlaceDialogComponent,
-        PathDialogComponent
+        PathDialogComponent,
+        PhotoDialogComponent
     ],
     providers: [],
     bootstrap: [AppComponent],

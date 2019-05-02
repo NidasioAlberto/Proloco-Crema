@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Foto {{place.name}}</h1>
+<div mat-dialog-content>
+    <img mat-card-image [src]="this.place.photoUrl" alt="Foto monumento">
+</div>
+<div mat-dialog-actions>
+    <input hidden #fileInput type="file" accept="image/x-png,image/gif,image/jpeg" id="file" (change)="addPhoto()">
+    <button mat-raised-button color="primary" (click)="fileInput.click()">Modifica foto</button>
+
+    <button mat-button (click)="close()">Chiudi</button>
+</div>

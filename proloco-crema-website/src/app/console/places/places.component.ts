@@ -7,6 +7,9 @@ import { NewPlaceDialogComponent } from './new-place-dialog/new-place-dialog.com
 import { NewDescriptionDialogComponent } from './new-description-dialog/new-description-dialog.component'
 import { DeleteConfirmDialogComponent } from '../delete-confirm-dialog/delete-confirm-dialog.component'
 import { Description } from 'src/app/utils/description'
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
+import { PhotoDialogComponent } from './photo-dialog/photo-dialog.component';
 
 @Component({
     selector: 'app-places',
@@ -18,7 +21,7 @@ export class PlacesComponent {
     places: Place[]
     associationId: string
 
-    constructor(private router: ActivatedRoute, private firestore: FirestoreService, public dialog: MatDialog, private snackBar: MatSnackBar) {
+    constructor(private router: ActivatedRoute, private firestore: FirestoreService, public dialog: MatDialog, private snackBar: MatSnackBar, private storage: AngularFireStorage) {
         this.router.parent.params.subscribe(params => {
             this.firestore.getPlaces(params.associationId).subscribe(places => {
                 this.places = places
@@ -110,6 +113,22 @@ export class PlacesComponent {
                     console.log(err)
                 })
             }
+        });
+    }
+
+    addPhoto(place: Place) {
+        const dialogRef = this.dialog.open(PhotoDialogComponent, { data: place })
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The photo dialog was closed', result);
+        });
+    }
+
+    editPhoto(place: Place) {
+        const dialogRef = this.dialog.open(PhotoDialogComponent, { data: place })
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The photo dialog was closed', result);
         });
     }
 }
