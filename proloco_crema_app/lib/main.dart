@@ -41,6 +41,8 @@ class MainPage extends StatefulWidget {
 }
 
 class MainPageState extends State<MainPage> {
+  Set<Marker> _markers = Set();
+  MapType _defaultMapType = MapType.normal;
   GoogleMapController _controller;
   bool pathsCardVisible = false;
   bool monumentsCardVisible =false;
@@ -74,13 +76,12 @@ class MainPageState extends State<MainPage> {
         children: <Widget>[
           GoogleMap(
             onMapCreated: _onMapCreated,
-            options: GoogleMapOptions(
-              mapType: MapType.normal,
-              cameraPosition:  CameraPosition(
-                target:  LatLng(45.364171, 9.682941),
-                zoom: 11.0,
-              ),
+            mapType: _defaultMapType,
+            initialCameraPosition: CameraPosition(
+              target: LatLng(45.364171, 9.682941),
+              zoom: 11.0,
             ),
+            markers: _markers,
           ),
           
           SafeArea(
@@ -104,34 +105,46 @@ class MainPageState extends State<MainPage> {
                   child: RouteCard(addMarker:(DocumentSnapshot ds){
                     _controller.moveCamera(CameraUpdate.newLatLng(LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude)));
                     pathsCardVisible = false;
-                    _controller.clearMarkers();
                     setState(() {
-                      
+                     
                     });
-                    _controller.addMarker(
-                      MarkerOptions(
+                     _markers.add(
+                      Marker(
+                        markerId: MarkerId(ds.documentID),
+                        position: LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude),
+                        draggable: false,
+                        infoWindow: InfoWindow(title: ds['title'],snippet: ds['descriptions'][0][language]),
+                      )
+                      /*MarkerOptions(
                         position: LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude),
                         draggable: false,
                         infoWindowText: InfoWindowText(ds['title'], ds['descriptions'][0][language]),
-                      )
+                      )*/
                     );
-                  }),
+                    print(ds.documentID);
+                    
+                  },
+                  clearMarker: (){
+                    _markers.clear();
+                  },
+                  ),
                   visible: pathsCardVisible,
                 ),
                 Visibility(
                   child: MonumentsCard(placeMarker:(DocumentSnapshot ds){
                    _controller.moveCamera(CameraUpdate.newLatLng(LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude)));
                     monumentsCardVisible = false;
-                    _controller.clearMarkers();
+                    _markers.clear();
                     setState(() {
                       
                     });
-                    _controller.addMarker(
-                      MarkerOptions(
+                    _markers.add(
+                      Marker(
+                        markerId: MarkerId(ds.documentID),
                         position: LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude),
                         draggable: false,
-                        infoWindowText: InfoWindowText(ds['title'], ds['descriptions'][0][language]),
-                      ),
+                        infoWindow: InfoWindow(title: ds['title'],snippet: ds['descriptions'][0][language]),
+                      )
                     );
                   }),
                   visible: monumentsCardVisible,
@@ -148,14 +161,10 @@ class MainPageState extends State<MainPage> {
       floatingActionButton: Settings(mapChange: (mapSatellite) {
         setState(() {
           if(mapSatellite) {
-            _controller..updateMapOptions(GoogleMapOptions(
-              mapType: MapType.satellite
-            ));
+            _defaultMapType = MapType.satellite;
             print("map changed to satellite view");
           } else {
-            _controller..updateMapOptions(GoogleMapOptions(
-              mapType: MapType.normal
-            ));
+           _defaultMapType = MapType.normal;
             print("map changed to normal view");
           }
         });

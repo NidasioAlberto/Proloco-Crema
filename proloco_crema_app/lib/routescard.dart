@@ -4,9 +4,9 @@ import 'allTranslations.dart';
 
 class RouteCard extends StatefulWidget {
 
-  Function addMarker;
+  Function addMarker,clearMarker;
 
-  RouteCard({Key key, this.addMarker}) : super(key: key);
+  RouteCard({Key key, this.addMarker, this.clearMarker}) : super(key: key);
 
   @override
   _RouteCardState createState(){
@@ -45,6 +45,7 @@ class _RouteCardState extends State<RouteCard>{
     }
 
     void _markers(AsyncSnapshot<QuerySnapshot> s, int i){
+      widget.clearMarker();
       for(int j = 0; j<s.data.documents[i]['places'].length;j++){
         String p=s.data.documents[i]['places'][j].path; 
         List<String> split = p.split('/');
