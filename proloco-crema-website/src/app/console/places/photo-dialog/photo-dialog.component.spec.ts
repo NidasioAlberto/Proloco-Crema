@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AboutContentComponent } from './about-content.component';
+import { PhotoDialogComponent } from './photo-dialog.component';
 
-describe('AboutContentComponent', () => {
-  let component: AboutContentComponent;
-  let fixture: ComponentFixture<AboutContentComponent>;
+describe('PhotoDialogComponent', () => {
+  let component: PhotoDialogComponent;
+  let fixture: ComponentFixture<PhotoDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AboutContentComponent ]
+      declarations: [ PhotoDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AboutContentComponent);
+    fixture = TestBed.createComponent(PhotoDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

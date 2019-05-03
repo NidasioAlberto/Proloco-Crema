@@ -14,15 +14,7 @@ export class HomePageComponent {
         {
             lable: 'Home',
             route: 'home',
-        },
-        {
-            lable: 'How to',
-            route: 'how-to',
-        },
-        {
-            lable: 'About',
-            route: 'about',
-        } 
+        }
     ]
     activeLink = this.links[0]
 

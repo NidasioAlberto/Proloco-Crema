@@ -17,7 +17,7 @@
                     <mat-panel-title>{{place.title}}</mat-panel-title>
                     <mat-panel-description>{{place.address.title}}</mat-panel-description>
                 </mat-expansion-panel-header>
-                <div *ngIf="place.descriptions != null">
+                <div *ngIf="place.descriptions != null">                    
                     <!-- This select sets the default description -->
                     <mat-form-field>
                         <mat-select placeholder="Default descriptions" [(value)]="place.defaultDescription" (selectionChange)="changeDefaultDescription(places.indexOf(place), place.defaultDescription)">
@@ -40,6 +40,10 @@
             
                     <!-- Enable the user to add a description through a dialog -->
                     <button mat-raised-button color="primary" style="margin-left: 8px;" (click)="addDescription(place.placeId)">Aggiungi descrizione</button>
+            
+                    <!-- Enable the user to upload a new photo for the place -->
+                    <button mat-raised-button color="primary" *ngIf="place.photoUrl == undefined" style="margin-left: 8px;" (click)="addPhoto(place)">Aggiungi foto</button>
+                    <button mat-raised-button color="primary" *ngIf="place.photoUrl != undefined" style="margin-left: 8px;" (click)="editPhoto(place)">Modifica foto</button>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

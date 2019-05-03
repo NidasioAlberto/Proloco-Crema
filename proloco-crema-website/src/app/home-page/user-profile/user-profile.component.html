@@ -5,8 +5,6 @@
             <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-            Here you will find your profile sumary
-            
             <mat-list>
                 <div *ngFor="let association of associations">
                     <mat-list-item>
@@ -21,8 +19,7 @@
             </mat-list>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-button *ngIf="userRole == 'admin'" (click)="goToConsole()">Go to console</button>
-            <button mat-button (click)="logout()">Logout</button>
+            <button mat-raised-button color="warn" (click)="logout()">Logout</button>
         </mat-card-actions>
     </mat-card>
 </div>

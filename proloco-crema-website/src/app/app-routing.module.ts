@@ -3,16 +3,13 @@ import { Routes, RouterModule } from '@angular/router'
 
 import { HomePageComponent } from './home-page/home-page.component'
 import { MainContentComponent } from './home-page/main-content/main-content.component'
-import { HowToContentComponent } from './home-page/how-to-content/how-to-content.component'
-import { AboutContentComponent } from './home-page/about-content/about-content.component'
 import { LoginComponent } from  './home-page/login/login.component'
 import { UserProfileComponent } from './home-page/user-profile/user-profile.component'
 
 import { AuthGuard } from './core/auth.guard'
 import { ConsoleComponent } from './console/console.component'
-import { SummaryComponent } from './console/summary/summary.component';
-import { PathsComponent } from './console/paths/paths.component';
-import { PlacesComponent } from './console/places/places.component';
+import { PathsComponent } from './console/paths/paths.component'
+import { PlacesComponent } from './console/places/places.component'
 
 const routes: Routes = [
     {
@@ -27,14 +24,6 @@ const routes: Routes = [
             {
                 path: 'home',
                 component: MainContentComponent
-            },
-            {
-                path: 'how-to',
-                component: HowToContentComponent
-            },
-            {
-                path: 'about',
-                component: AboutContentComponent,
             },
             {
                 path: 'login',
@@ -53,12 +42,8 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'summary',
+                redirectTo: 'paths',
                 pathMatch: 'full'
-            },
-            {
-                path: 'summary',
-                component: SummaryComponent
             },
             {
                 path: 'paths',
