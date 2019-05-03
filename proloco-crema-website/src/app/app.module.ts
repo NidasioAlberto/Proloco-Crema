@@ -25,8 +25,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
 
 //app components
 import { MainContentComponent } from './home-page/main-content/main-content.component'
-import { HowToContentComponent } from './home-page/how-to-content/how-to-content.component'
-import { AboutContentComponent } from './home-page/about-content/about-content.component'
 import { LoginComponent } from './home-page/login/login.component'
 
 //firebase
@@ -63,8 +61,6 @@ import { PhotoDialogComponent } from './console/places/photo-dialog/photo-dialog
         AppComponent,
         HomePageComponent,
         MainContentComponent,
-        HowToContentComponent,
-        AboutContentComponent,
         LoginComponent,
         UserProfileComponent,
         ConsoleComponent,
