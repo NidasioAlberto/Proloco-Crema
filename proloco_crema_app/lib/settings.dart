@@ -16,7 +16,7 @@ class SettingsState extends State<Settings> with TickerProviderStateMixin {
   AnimationController _controller;
   Animation _animation;
 
-  bool _areOpened = true;
+  bool _areOpened = false;
 
   //impostazione mappa stellite / mappa normale
   bool mapSatellite = true;
@@ -32,7 +32,7 @@ class SettingsState extends State<Settings> with TickerProviderStateMixin {
   void initState() {
     super.initState();
 
-    _controller = AnimationController(vsync: this, value: 1.0, duration: Duration(milliseconds: 250));
+    _controller = AnimationController(vsync: this, value: 0.0, duration: Duration(milliseconds: 250));
 
     _animation = CurvedAnimation(
       parent: _controller,
@@ -96,22 +96,6 @@ class SettingsState extends State<Settings> with TickerProviderStateMixin {
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4),
-                ),
-                IconButton(
-                  icon: Icon(audioIcon),
-                  tooltip: "Audio",
-                  onPressed: () {
-                    setState(() {
-                      if(audiooff) {
-                        audiooff = false;
-                        audioIcon = Icons.volume_off;
-                      } else {
-                        audiooff = true;
-                        audioIcon = Icons.volume_up;              
-                      }
-                      widget.audioChange(audiooff);
-                    });
-                  },
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4),
