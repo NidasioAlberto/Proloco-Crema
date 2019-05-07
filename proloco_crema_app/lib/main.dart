@@ -104,6 +104,7 @@ class MainPageState extends State<MainPage> {
                 Visibility(
                   child: RouteCard(addMarker:(DocumentSnapshot ds){
                     _controller.moveCamera(CameraUpdate.newLatLng(LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude)));
+                    _controller.moveCamera(CameraUpdate.zoomTo(14.3));
                     pathsCardVisible = false;
                     setState(() {
                      
@@ -133,6 +134,7 @@ class MainPageState extends State<MainPage> {
                 Visibility(
                   child: MonumentsCard(placeMarker:(DocumentSnapshot ds){
                    _controller.moveCamera(CameraUpdate.newLatLng(LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude)));
+                   _controller.moveCamera(CameraUpdate.zoomTo(18.0));
                     monumentsCardVisible = false;
                     _markers.clear();
                     setState(() {

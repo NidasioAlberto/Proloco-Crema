@@ -67,14 +67,14 @@ class _MonumentsCardState extends State<MonumentsCard>{
               return new Card(
               child: InkWell(
                 child: new Container(
-                height: 35,
+                height: 40,
                 child: new Row(
                   children: <Widget>[
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(snapshot.data.documents[index]['title']),
-                        Text(snapshot.data.documents[index]['descriptions'][0][language],style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.75)),
+                        Text(snapshot.data.documents[index]['title'], style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.25)),
+                        Text(snapshot.data.documents[index]['descriptions'][0][language],style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.95)),
                       ],
                     )
                   ],
