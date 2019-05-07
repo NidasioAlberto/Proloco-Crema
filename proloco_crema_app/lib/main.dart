@@ -42,6 +42,7 @@ class MainPage extends StatefulWidget {
 
 class MainPageState extends State<MainPage> {
   Set<Marker> _markers = Set();
+  DocumentSnapshot _markerData;
   MapType _defaultMapType = MapType.normal;
   GoogleMapController _controller;
   bool pathsCardVisible = false;
@@ -104,6 +105,7 @@ class MainPageState extends State<MainPage> {
                 Visibility(
                   child: RouteCard(addMarker:(DocumentSnapshot ds){
                     _controller.moveCamera(CameraUpdate.newLatLng(LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude)));
+                    _controller.moveCamera(CameraUpdate.zoomTo(14.3));
                     pathsCardVisible = false;
                     setState(() {
                      
@@ -114,6 +116,14 @@ class MainPageState extends State<MainPage> {
                         position: LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude),
                         draggable: false,
                         infoWindow: InfoWindow(title: ds['title'],snippet: ds['descriptions'][0][language]),
+                        onTap: (){
+                          monumentsDescriptionCardVisible = true;
+                          _markerData = ds;
+                          setState(() {
+                            
+                          });
+
+                        }
                       )
                       /*MarkerOptions(
                         position: LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude),
@@ -133,6 +143,7 @@ class MainPageState extends State<MainPage> {
                 Visibility(
                   child: MonumentsCard(placeMarker:(DocumentSnapshot ds){
                    _controller.moveCamera(CameraUpdate.newLatLng(LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude)));
+                   _controller.moveCamera(CameraUpdate.zoomTo(18));
                     monumentsCardVisible = false;
                     _markers.clear();
                     setState(() {
@@ -144,13 +155,25 @@ class MainPageState extends State<MainPage> {
                         position: LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude),
                         draggable: false,
                         infoWindow: InfoWindow(title: ds['title'],snippet: ds['descriptions'][0][language]),
+                        onTap:(){
+                          monumentsDescriptionCardVisible = true;
+                          _markerData = ds;
+                          setState(() {
+                            
+                          });
+                        }
                       )
                     );
                   }),
                   visible: monumentsCardVisible,
                 ),
                 Visibility(
-                  child: MonumentDescriptionCard(),
+                  child: MonumentDescriptionCard(show:(){
+                    monumentsCardVisible = false;
+                    setState(() {
+                      
+                    });
+                  },data: _markerData,),
                   visible: monumentsDescriptionCardVisible,
                 )
               ],
