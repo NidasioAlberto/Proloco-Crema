@@ -143,7 +143,11 @@ class MainPageState extends State<MainPage> {
                 Visibility(
                   child: MonumentsCard(placeMarker:(DocumentSnapshot ds){
                    _controller.moveCamera(CameraUpdate.newLatLng(LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude)));
+<<<<<<< HEAD
                    _controller.moveCamera(CameraUpdate.zoomTo(18));
+=======
+                   _controller.moveCamera(CameraUpdate.zoomTo(18.0));
+>>>>>>> 8220dfc11b86e58ccaad557cb99a404088d0e2bd
                     monumentsCardVisible = false;
                     _markers.clear();
                     setState(() {

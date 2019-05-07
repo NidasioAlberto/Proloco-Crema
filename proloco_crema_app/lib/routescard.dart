@@ -63,14 +63,19 @@ class _RouteCardState extends State<RouteCard>{
             return new Card(
               child: InkWell(
                 child: new Container(
-                height: 35,
+                height: 40,
                 child: new Row(
                   children: <Widget>[
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+<<<<<<< HEAD
                         Text(snapshot.data.documents[index]['title'],style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.25)),
                         Text(snapshot.data.documents[index]['descriptions'][0][language],style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.95)),
+=======
+                        Text(snapshot.data.documents[index]['title'][language], style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.25)),
+                        Text(snapshot.data.documents[index]['description'][language],style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.95)),
+>>>>>>> 8220dfc11b86e58ccaad557cb99a404088d0e2bd
                       ],
                     )
                   ],
