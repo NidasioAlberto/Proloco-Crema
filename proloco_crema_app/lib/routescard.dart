@@ -57,32 +57,19 @@ class _RouteCardState extends State<RouteCard>{
     return StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance.collection('Paths').orderBy('title').snapshots(),
       builder: (context, snapshot) {
-        if(snapshot.hasData){
+        if(snapshot.hasData) {
           return ListView.builder(
-          itemBuilder: ( contextt ,index){
-            return new Card(
-              child: InkWell(
-                child: new Container(
-                height: 40,
-                child: new Row(
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(snapshot.data.documents[index]['title'][language],style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.25)),
-                        Text(snapshot.data.documents[index]['description'][language],style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.95)),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              onTap:() => _markers(snapshot,index),
-              ),
-            );
-          },
-          itemCount: snapshot.data.documents.length,
-        );
-        }else{
+            itemBuilder: (contextt ,index) {
+              return ListTile(
+                  title: Text(snapshot.data.documents[index]['title'][language], style: TextStyle(fontSize: 16)),
+                  subtitle: Text(snapshot.data.documents[index]['description'][language], style: TextStyle(fontSize: 14)),
+                  onTap: () => _markers(snapshot, index),
+                  dense: true,
+              );
+            },
+            itemCount: snapshot.data.documents.length,
+          );
+        } else {
           return Container(
                 height: 35,
                 child: new Row(
