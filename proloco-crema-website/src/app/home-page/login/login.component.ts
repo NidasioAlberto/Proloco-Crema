@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
         this.auth.googleLogin().then(user => {
             //we have the user !
             if(user != undefined) this.router.navigate(['/public/user-profile'])
+        }).catch(err => {
+            console.log('error!', err)
         })
     }
 }
