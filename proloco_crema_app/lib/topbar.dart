@@ -5,8 +5,9 @@ import 'package:url_launcher/url_launcher.dart';
 class TopBar extends StatefulWidget {
   Function onRoutesButtonClicked;
   Function onMonumentsButtonClicked;
+  String p;
 
-  TopBar({Key key, this.onRoutesButtonClicked,this.onMonumentsButtonClicked}) : super(key: key);
+  TopBar({Key key, this.onRoutesButtonClicked,this.onMonumentsButtonClicked,this.p}) : super(key: key);
 
   @override
   _TopBarState createState() {
@@ -15,6 +16,7 @@ class TopBar extends StatefulWidget {
 }
 
 class _TopBarState extends State<TopBar> {
+
   @override
   void initState() {
     super.initState();
@@ -23,12 +25,16 @@ class _TopBarState extends State<TopBar> {
   @override
   Widget build(BuildContext context) {
 
+    String destination = widget.p;
+
     _launchURL() async {
-      const url = 'https://flutter.io';
-      if (await canLaunch(url)) {
-        await launch(url);
+
+      const url = 'https://www.google.com/maps/dir/?api=1&origin=&destination=';
+      String sito = url + destination+'&travelmode=walking';
+      if (await canLaunch(sito)) {
+        await launch(sito);
       } else {
-        throw 'Could not launch $url';
+        throw 'Could not launch $sito';
       }
     }
     return Container(
@@ -62,6 +68,7 @@ class _TopBarState extends State<TopBar> {
               ),
               IconButton(
                 icon: Icon(Icons.local_airport),
+                tooltip: allTranslations.text('travel_tooltip'),
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onPressed: () =>_launchURL(),

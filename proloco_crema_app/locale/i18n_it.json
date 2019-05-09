@@ -4,5 +4,6 @@
     "setting_tooltip": "Impostazioni",
     "search": "Cerca",
     "route_tooltip": "Percorsi",
-    "place_tooltip": "Monumenti"
+    "place_tooltip": "Monumenti",
+    "travel_tooltip": "Indicazioni stradali"
 }

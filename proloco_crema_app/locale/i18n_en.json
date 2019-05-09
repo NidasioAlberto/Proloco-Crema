@@ -4,5 +4,6 @@
     "setting_tooltip": "Settings",
     "search": "Search",
     "route_tooltip": "Routes",
-    "place_tooltip": "Places"
+    "place_tooltip": "Places",
+    "travel_tooltip": "Directions"
 }

@@ -3,10 +3,9 @@ import 'allTranslations.dart';
 
 class Settings extends StatefulWidget {
   Function(bool) mapChange;
-  Function(bool) audioChange;
   Function(String) languageChange;
 
-  Settings({Key key, this.mapChange, this.audioChange, this.languageChange}) : super(key: key);
+  Settings({Key key, this.mapChange, this.languageChange}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => SettingsState();
@@ -22,9 +21,6 @@ class SettingsState extends State<Settings> with TickerProviderStateMixin {
   bool mapSatellite = true;
   IconData mapIcon = Icons.layers_clear;
 
-  //impostazione audio off / audio on
-  bool audiooff= true;
-  IconData audioIcon = Icons.volume_off;
 
   Animation<RelativeRect> panelAnimation;
   
