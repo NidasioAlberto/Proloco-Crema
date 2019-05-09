@@ -16,9 +16,12 @@ class MonumentDescriptionCard extends StatefulWidget {
 
 class _MonumentDescriptionCardState extends State<MonumentDescriptionCard>{
   
+  DocumentSnapshot data;
+
   @override
   void initState(){
     super.initState();
+    data = widget.data;
   }
 
   @override
@@ -47,6 +50,11 @@ class _MonumentDescriptionCardState extends State<MonumentDescriptionCard>{
               )
             ],
           ),
+          new Row(
+            children: <Widget>[
+              Text(data['title'])
+            ],
+          )
         ],
       )
     );

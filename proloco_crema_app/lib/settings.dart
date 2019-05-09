@@ -16,7 +16,7 @@ class SettingsState extends State<Settings> with TickerProviderStateMixin {
   AnimationController _controller;
   Animation _animation;
 
-  bool _areOpened = true;
+  bool _areOpened = false;
 
   //impostazione mappa stellite / mappa normale
   bool mapSatellite = true;
@@ -33,7 +33,7 @@ class SettingsState extends State<Settings> with TickerProviderStateMixin {
     super.initState();
 
     _controller = AnimationController(vsync: this, value: 1.0, duration: Duration(milliseconds: 250));
-
+    _controller.reverse();
     _animation = CurvedAnimation(
       parent: _controller,
       curve: Interval(0.0, 1.0, curve: Curves.ease),

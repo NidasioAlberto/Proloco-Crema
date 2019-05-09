@@ -67,7 +67,6 @@ class MainPageState extends State<MainPage> {
         // do anything you need to do if the language changes
         print('Language has been changed to: ${allTranslations.currentLanguage}');
     }
-  
   String language = allTranslations.currentLanguage;
 
   @override
@@ -112,10 +111,10 @@ class MainPageState extends State<MainPage> {
                     });
                      _markers.add(
                       Marker(
+                        consumeTapEvents: false,
                         markerId: MarkerId(ds.documentID),
                         position: LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude),
                         draggable: false,
-                        infoWindow: InfoWindow(title: ds['title'],snippet: ds['descriptions'][0][language]),
                         onTap: (){
                           monumentsDescriptionCardVisible = true;
                           _markerData = ds;
@@ -154,7 +153,6 @@ class MainPageState extends State<MainPage> {
                         markerId: MarkerId(ds.documentID),
                         position: LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude),
                         draggable: false,
-                        infoWindow: InfoWindow(title: ds['title'],snippet: ds['descriptions'][0][language]),
                         onTap:(){
                           monumentsDescriptionCardVisible = true;
                           _markerData = ds;
@@ -173,7 +171,7 @@ class MainPageState extends State<MainPage> {
                     setState(() {
                       
                     });
-                  },data: _markerData,),
+                  },data: (_markerData)),
                   visible: monumentsDescriptionCardVisible,
                 )
               ],
