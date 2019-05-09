@@ -9,7 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'monumentscard.dart';
 import 'monumentsDescriptionCard.dart';
 
-Future main() async {
+main() async {
   await allTranslations.init();
 
   runApp(new MyApp());
@@ -56,16 +56,13 @@ class MainPageState extends State<MainPage> {
 
   @override
     void initState(){
-        super.initState();
+      super.initState();
 
-        // Initializes a callback should something need 
-        // to be done when the language is changed
-        allTranslations.onLocaleChangedCallback = _onLocaleChanged;
+      allTranslations.onLocaleChangedCallback = _onLocaleChanged;
     }
 
     _onLocaleChanged() async {
-        // do anything you need to do if the language changes
-        print('Language has been changed to: ${allTranslations.currentLanguage}');
+      print('Language has been changed to: ${allTranslations.currentLanguage}');
     }
   String language = allTranslations.currentLanguage;
 
@@ -75,6 +72,7 @@ class MainPageState extends State<MainPage> {
       body: Stack(
         children: <Widget>[
           GoogleMap(
+            myLocationEnabled: true,
             onMapCreated: _onMapCreated,
             mapType: _defaultMapType,
             initialCameraPosition: CameraPosition(
@@ -102,66 +100,56 @@ class MainPageState extends State<MainPage> {
                   },
                 ),
                 Visibility(
-                  child: RouteCard(addMarker:(DocumentSnapshot ds){
-                    _controller.moveCamera(CameraUpdate.newLatLng(LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude)));
-                    _controller.moveCamera(CameraUpdate.zoomTo(14.3));
-                    pathsCardVisible = false;
-                    setState(() {
-                     
-                    });
-                     _markers.add(
-                      Marker(
-                        consumeTapEvents: false,
-                        markerId: MarkerId(ds.documentID),
-                        position: LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude),
-                        draggable: false,
-                        onTap: (){
-                          monumentsDescriptionCardVisible = true;
-                          _markerData = ds;
-                          setState(() {
-                            
-                          });
+                  child: RouteCard(addMarker: (DocumentSnapshot ds) {
+                      setState(() {
+                        _controller.moveCamera(CameraUpdate.newLatLng(LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude)));
+                        _controller.moveCamera(CameraUpdate.zoomTo(14.3));
+                        pathsCardVisible = false;
 
-                        }
-                      )
-                      /*MarkerOptions(
-                        position: LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude),
-                        draggable: false,
-                        infoWindowText: InfoWindowText(ds['title'], ds['descriptions'][0][language]),
-                      )*/
-                    );
-                    print(ds.documentID);
-                    
-                  },
-                  clearMarker: (){
-                    _markers.clear();
-                  },
+                        _markers.add(
+                          Marker(
+                            markerId: MarkerId(ds.documentID),
+                            position: LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude),
+                            draggable: false,
+                            //infoWindow: InfoWindow(title: ds['title'],snippet: ds['descriptions'][0][language]),
+                            onTap: (){
+                              setState(() {
+                                monumentsDescriptionCardVisible = true;
+                                _markerData = ds;
+                              });
+                            }
+                          )
+                        );
+                      });
+                    },
+                    clearMarker: () {
+                      _markers.clear();
+                    },
                   ),
                   visible: pathsCardVisible,
                 ),
                 Visibility(
                   child: MonumentsCard(placeMarker:(DocumentSnapshot ds){
-                   _controller.moveCamera(CameraUpdate.newLatLng(LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude)));
-                   _controller.moveCamera(CameraUpdate.zoomTo(18.0));
-                    monumentsCardVisible = false;
-                    _markers.clear();
                     setState(() {
-                      
+                      _controller.moveCamera(CameraUpdate.newLatLng(LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude)));
+                      _controller.moveCamera(CameraUpdate.zoomTo(18.0));
+                      monumentsCardVisible = false;
+                      _markers.clear();
+                      _markers.add(
+                        Marker(
+                          markerId: MarkerId(ds.documentID),
+                          position: LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude),
+                          draggable: false,
+                          //infoWindow: InfoWindow(title: ds['title'],snippet: ds['descriptions'][0][language]),
+                          onTap:(){
+                            setState(() {
+                              monumentsDescriptionCardVisible = true;
+                              _markerData = ds;
+                            });
+                          }
+                        )
+                      );
                     });
-                    _markers.add(
-                      Marker(
-                        markerId: MarkerId(ds.documentID),
-                        position: LatLng(ds['address']['geopoint'].latitude, ds['address']['geopoint'].longitude),
-                        draggable: false,
-                        onTap:(){
-                          monumentsDescriptionCardVisible = true;
-                          _markerData = ds;
-                          setState(() {
-                            
-                          });
-                        }
-                      )
-                    );
                   }),
                   visible: monumentsCardVisible,
                 ),
@@ -171,7 +159,7 @@ class MainPageState extends State<MainPage> {
                     setState(() {
                       
                     });
-                  },data: (_markerData)),
+                  }, data: _markerData,),
                   visible: monumentsDescriptionCardVisible,
                 )
               ],
