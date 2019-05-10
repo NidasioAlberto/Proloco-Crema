@@ -5,5 +5,6 @@
     "search": "Cerca",
     "route_tooltip": "Percorsi",
     "place_tooltip": "Monumenti",
-    "travel_tooltip": "Indicazioni stradali"
+    "travel_tooltip": "Indicazioni stradali",
+    "help_tooltip": "Aiuto"
 }

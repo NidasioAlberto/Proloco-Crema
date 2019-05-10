@@ -8,6 +8,7 @@ import 'allTranslations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'monumentscard.dart';
 import 'monumentsDescriptionCard.dart';
+import 'helpCard.dart';
 
 Future main() async {
   await allTranslations.init();
@@ -48,6 +49,7 @@ class MainPageState extends State<MainPage> {
   bool pathsCardVisible = false;
   bool monumentsCardVisible =false;
   bool monumentsDescriptionCardVisible = false;
+  bool helpCardvisible = false;
   String _waypoints;
 
   void _onMapCreated(GoogleMapController controller) {
@@ -86,6 +88,15 @@ class MainPageState extends State<MainPage> {
               zoom: 11.0,
             ),
             markers: _markers,
+            onTap: (LatLng){
+              pathsCardVisible = false;
+              monumentsCardVisible = false;
+              monumentsDescriptionCardVisible = false;
+              helpCardvisible = false;
+              setState(() {
+                
+              });
+            }
           ),
           
           SafeArea(
@@ -95,15 +106,26 @@ class MainPageState extends State<MainPage> {
                     setState(() {
                       pathsCardVisible = !pathsCardVisible; 
                       monumentsCardVisible = false;
-                      
+                      monumentsDescriptionCardVisible = false;
+                      helpCardvisible = false;
                     });
                   },
                   onMonumentsButtonClicked: (){
                     setState(() {
                       monumentsCardVisible = !monumentsCardVisible;
                       pathsCardVisible = false;
+                      monumentsDescriptionCardVisible = false;
+                      helpCardvisible = false;
                     });
-                  },p: (_waypoints),
+                  },
+                  onHelpButtonClicked: (){
+                    setState(() {
+                      helpCardvisible = !helpCardvisible;
+                      pathsCardVisible = false;
+                      monumentsCardVisible = false;
+                      monumentsDescriptionCardVisible = false;
+                    });
+                  },
                 ),
                 Visibility(
                   child: RouteCard(addMarker:(DocumentSnapshot ds){
@@ -180,6 +202,11 @@ class MainPageState extends State<MainPage> {
                     });
                   },data: (_markerData)),
                   visible: monumentsDescriptionCardVisible,
+                ),
+                Visibility(
+                  child: HelpCard(
+                  ),
+                  visible: helpCardvisible,
                 )
               ],
             )
