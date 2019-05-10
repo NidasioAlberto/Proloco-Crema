@@ -87,6 +87,7 @@ class MainPageState extends State<MainPage> {
               target: LatLng(45.364171, 9.682941),
               zoom: 11.0,
             ),
+            myLocationEnabled: true,
             markers: _markers,
             onTap: (LatLng){
               pathsCardVisible = false;
