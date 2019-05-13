@@ -35,7 +35,24 @@ class _HelpCardState extends State<HelpCard>{
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Text("\n\n\n         faccio schifo")
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.directions_run),
+                      Text("Premi questa icona per vedere una lista di tutti i percorsi disponibili",style: TextStyle(fontSize: 10)),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.account_balance),
+                      Text("Premi questa icona per vedere la lista di tutti i monumenti disponibili",style: TextStyle(fontSize: 10))
+                    ],                    
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.local_airport),
+                      Text("Premi questa icona dopo aver toccato un monumento sulla mappa per \n viaggiare alla sua posizione",style: TextStyle(fontSize:10)),
+                    ],                    
+                  )
             ],
           )          
         ],
